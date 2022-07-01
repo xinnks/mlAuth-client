@@ -14,16 +14,6 @@ const logOut = async () => {
     router.replace('/login');
   }
 }
-
-// automatic logging out on session state changes
-watch(session, (oldVal, newVal) => {
-  console.log({session}, {oldVal, newVal})
-  // if(!newVal){
-  //   console.log("Logging Out!!")
-  //   store.dispatch('LOGOUT');
-  //   router.replace('/login')
-  // }
-})
 </script>
 
 <template>

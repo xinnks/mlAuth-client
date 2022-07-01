@@ -102,9 +102,3 @@ export default class mlAuth {
 		}
 	}
 }
-// const somedata = ${Vars.client}:${Vars.secret}
-// console.log(somedata)
-// let encodedData = btoa(somedata)
-// console.log({encodedData})
-// let decodedData = atob(encodedData)
-// console.log({decodedData})
