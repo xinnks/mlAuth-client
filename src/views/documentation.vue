@@ -55,7 +55,7 @@
             Inside your dashboard under the "My Apps" clink on the "Add Keys" button.
             Provide the following information: <br>
             <strong>callback URL</strong> - This is the url that mlAuth will be redirecting your users to after they click the magic links sent to them. <br>
-            <strong>Life Span</strong> - This is the time in minutes which the magic links you will be sending to your users will take to expire. When not provided, we will assign a default 15 minutes duration. 
+            <strong>Life Span</strong> - This is the time in minutes which the magic links you will be sending to your users will take to expire. When not provided, we will assign a default 30 minutes limit. 
           </p>
           <p>
           On successfull generation, you will be presented with your <strong><i>Client Key</i></strong> and <strong><i>Client Secret</i></strong>. You will be using these two as per the following instructions. <br>
@@ -82,12 +82,12 @@
           <p>
             Now that we understand the authentication flow, we can start making requests to mlAuth. <br>
             From our apps, we need to make "login requests" as outlined on <a href="step-2">step 2</a> and "login verifications" as outlined on <a href="step-5">step 5</a>. <br>
-            To automate this process, install the mlAuth npm package.
+            To automate this process, install the <a href="npmjs.com/package/mlauth-js"><strong>mlauth-js</strong></a> npm package.
           </p>
           <p>
             <em>
               <code>
-                npm install mlauth
+                npm install mlauth-js
               </code>
             </em>
           </p>
@@ -129,7 +129,7 @@
           <h4 class="font-semibold" id="making-login-verification-requests">Making login verification requests</h4>
           <p>
             To verify login requests, you need to obtain a token query parameter passed as part of the callback url.
-            Using the mlAuth npm package, you can verify it as follows. 
+            Using the mlauth-js npm package, you can verify it as follows. 
           </p>
           <p>
             <em>
@@ -139,7 +139,7 @@
             </em>
           </p>
           <p>
-            The request returns a Promise that resolves with a HTTP 201 response when successful or a corresponding error status otherwise.
+            The login verification request returns a Promise that resolves with a HTTP 200 response when successful or a corresponding status code otherwise. Successfull requests are accompanied with information about the created magic link.
           </p>
         </div>
     </template>
