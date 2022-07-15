@@ -19,7 +19,7 @@ export const api = {
   },
 
   verifyAccount: (token) => {
-    return api.provider().verifyApp(token);
+    return api.provider().verifyAccount(token);
   },
 
   generateKeys: (data, token) => {
