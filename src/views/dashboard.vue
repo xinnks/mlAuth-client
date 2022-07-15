@@ -51,12 +51,22 @@ const generateKeys = () => {
   if(callbackUrl.value === "") return missing("Callback Url", callbackUrl)
   if(!/https?:\/\/[\d\w]+((\.\w{2,})|(:\d{4}))/gi.test(callbackUrl.value)) return missing("Callback Url", callbackUrl, false)
 
-  let finalData = lifespan.value ? {
-    life_span: lifespan.value,
-    callback_url: callbackUrl.value} : 
-    {callback_url: callbackUrl.value}
+const createApp = () => {
+  if(appName.value === "")
+    return missing("App Name", appName)
+  if(callbackUrl.value === "")
+    return missing("Callback Url", callbackUrl)
+  if(!/https?:\/\/[\d\w]+((\.\w{2,})|(:\d{4}))/gi.test(callbackUrl.value))
+    return missing("Callback Url", callbackUrl, false)
 
-  store.dispatch('GENERATE_KEYS', finalData);
+  let finalData = {
+    name: appName.value,
+    life_span: lifeSpan.value || 1800000,
+    callback_url: callbackUrl.value,
+    production: production === "checked"
+  }
+
+  store.dispatch('CREATE_APP', finalData);
 }
 
 watch(route.path, () => {
@@ -99,18 +109,39 @@ const missing = (field, val, syntax = true) => {
         
       </div>
 
-      <div class="w-full inline-flex flex-col items-center justify-center ring-2 ring-gray-300 p-8 rounded-2xl" v-if="!hasKeys">
-          <span class="text-center">
-            Generate keys for your app to start authenticating users.
+        <!-- New App Form -->
+        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4" v-if="showAppForm">
+          <div class="inline-flex justify-center mb-4">
+            <span class="font-bold">Create a new app</span>
+          </div>
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">App Name: </label>
+            <input type="text" v-model.number="appName.value" class="w-3/5 appearance-none border-2 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" :class="{'bg-red-200 border-red-300 focus:border-red-300': appName.error && appName.value === '', 'bg-gray-100 border-gray-500 focus:border-gray-600': !(appName.error && appName.value === '')}">
           </span>
-          <div class="inline-flex justify-center pt-8">
-            <button class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="showKeysForm = true">
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">Callback Url: </label>
+            <input type="text" v-model.number="callbackUrl.value" class="w-3/5 appearance-none border-2 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" :class="{'bg-red-200 border-red-300 focus:border-red-300': callbackUrl.error && callbackUrl.value === '', 'bg-gray-100 border-gray-500 focus:border-gray-600': !(callbackUrl.error && callbackUrl.value === '')}">
+          </span>
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">Magic Link Timeout: </label>
+            <input type="number" @keydown="numbersOnly" v-model.number="lifeSpan.value" class="w-3/5 bg-gray-100 appearance-none border-2 border-gray-500 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+          </span>
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">App Environment: </label>
+            <input type="checkbox" value="checked" v-model="production.value" class="appearance-none border-2 border-gray-500 rounded p-2 text-gray-700 leading-tight focus:outline-none focus:border-gray-500" :class="{'bg-blue-600':production.value}"> 
+            <span class="px-2">{{ production.value ? "Production" : "Development" }}</span>
+          </span>
+          <div class="inline-flex justify-center space-x-4">
+            <button @click.prevent="cancelNewApp()" class="bg-gray-300 text-gray-500 ring-gray-300 hover:bg-yellow-100 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2">
+              <span>Cancel</span>
+            </button>
+            <button @click.prevent="createApp()" class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
-              <span>Add Keys</span>
+              <span>Create</span>
             </button>
           </div>
         </div>
-
+        <!-- New App Form -->
       <div class="w-full inline-flex flex-col justify-center ring-2 ring-gray-300 p-8 rounded-2xl relative" v-if="hasKeys && accountInfo">
         <div class="flex py-1">
           <span class="font-semibold pr-4">App Name: </span> {{accountInfo.appName}}
