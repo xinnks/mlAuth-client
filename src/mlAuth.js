@@ -76,9 +76,9 @@ export default class mlAuth {
 	/**
 	 * App keys generation request
 	 */
-	async generateKeys({data, sessionToken}){
+	async generateKeys({appId, sessionToken}){
 		if(!sessionToken) throw new Error("sessionToken is missing")
-		if(!data.callback_url) throw("callback_url is missing")
+		if(!appId) throw new Error("app_id is missing")
 		try {
 			return this.client.raw(`/service/generate-keys`, {
 				body: { ...data, sessionToken }
