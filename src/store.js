@@ -89,13 +89,33 @@ const account = {
         return false
       }
     },
-    GENERATE_KEYS: async ({ commit, state }, data) => {
+    CREATE_APP: async ({ commit, state, dispatch }, data) => {
+      dispatch("START_LOADING", "Creating app..")
       try {
-        const {status, _data: responseData} = await api.generateKeys({
+        const response = await api.createApp({
           data,
           sessionToken: state.session.token
         });
+        dispatch("STOP_LOADING")
+        console.log({response})
+        let { app } = response
+        let tempApp = Object.assign({},app)
+        delete app.secret
+        commit('updateApps', state.apps ? state.apps.push(app) : app);
+        return tempApp
       } catch (error) {
+        dispatch("STOP_LOADING")
+        let errorMessage = "Unknown error";
+        if(error instanceof FetchError){
+          errorMessage = error.data ? error.data.message : "App already exists"
+        }
+        commit("notify", {
+          message: errorMessage,
+          type: "error",
+        });
+        return false
+      }
+    },
         console.log(error)
         commit("notify", {
           show: true,
