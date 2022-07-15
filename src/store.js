@@ -9,11 +9,13 @@ const vuexLocal = new VuexPersistence({
 const account = {
   state: {
     user: null,
-    session: null
+    session: null,
+    apps: null
   },
   getters: {
     getUser: state => state.user,
-    getSession: state => state.session
+    getSession: state => state.session,
+    getApps: state => state.apps
   },
   mutations: {
     updateUser(state, payload){
@@ -21,6 +23,9 @@ const account = {
     },
     updateSession(state, payload){
       state.session = payload
+    },
+    updateApps(state, payload){
+      state.apps = payload
     }
   },
   actions: {
