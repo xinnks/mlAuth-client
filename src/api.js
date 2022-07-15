@@ -22,6 +22,10 @@ export const api = {
     return api.provider().verifyAccount(token);
   },
 
+  createApp: (data, token) => {
+    return api.provider().createApp(data, token);
+  },
+
   generateKeys: (data, token) => {
     return api.provider().generateKeys(data, token);
   },
