@@ -142,29 +142,40 @@ const missing = (field, val, syntax = true) => {
           </div>
         </div>
         <!-- New App Form -->
-      <div class="w-full inline-flex flex-col justify-center ring-2 ring-gray-300 p-8 rounded-2xl relative" v-if="hasKeys && accountInfo">
-        <div class="flex py-1">
-          <span class="font-semibold pr-4">App Name: </span> {{accountInfo.appName}}
+
+        <div v-for="(app, key) in apps" :key="key" class="inline-flex w-full px-2 py-4" v-if="!showAppForm && apps">
+          <div class="w-full inline-flex flex-col justify-center ring-2 ring-gray-300 px-6 pb-6 pt-2 rounded-2xl relative">
+            <div class="flex pt-2 pb-3 mb-2 border-b-2 justify-between" :class="{'border-red-300': !app.production, 'border-green-300': app.production}">
+              <span class="font-semibold">{{app.name}}</span>
+              <button @click="hideApps[app.id] = !hideApps[app.id]">{{hideApps[app.id] ? "more info" : "hide"}}</button>
+            </div>
+            <div class="flex flex-col" :class="{'hidden' : hideApps[app.id]}">
+              <div class="flex py-1">
+                <span class="font-semibold pr-4">Callback Url: </span> {{app.callbackUrl}}
+              </div>
+              <div class="flex py-1">
+                <span class="font-semibold pr-4">Magic Link Timeout: </span> {{ timeInMinutes(app.magicLinkTimeout) }}
+              </div>
+              <div class="flex py-1">
+                <span class="font-semibold pr-4">Client: </span> 
+                <span class="overflow-x-auto">{{app.client}}</span>
+              </div>
+              <div class="flex py-1">
+                <span class="font-semibold pr-4">Secret: </span> 
+                <code class="w-full relative">
+                {{app.secret || "***********************"}}
+                </code>
+              </div>
+              <div class="flex py-2 align-center">
+                <button class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="showAppForm = true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M10.758 11.828l7.849-7.849 1.414 1.414-1.414 1.415 2.474 2.474-1.414 1.415-2.475-2.475-1.414 1.414 2.121 2.121-1.414 1.415-2.121-2.122-2.192 2.192a5.002 5.002 0 0 1-7.708 6.294 5 5 0 0 1 6.294-7.708zm-.637 6.293A3 3 0 1 0 5.88 13.88a3 3 0 0 0 4.242 4.242z"/></svg>
+                  <span>Change Keys</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="flex py-1">
-          <span class="font-semibold pr-4">Callback Url: </span> {{accountInfo.callbackUrl}}
-        </div>
-        <div class="flex py-1">
-          <span class="font-semibold pr-4">Client Key: </span> 
-          <span class="overflow-x-auto">{{accountInfo.client}}</span>
-        </div>
-        <div class="flex py-1">
-          <span class="font-semibold pr-4">Client Secret: </span> 
-          <code class="w-full relative">
-          {{accountInfo.secret || "***********************"}}
-          </code>
-        </div>
-        <div class="w-full flex justify-center mt-3 py-2">
-          <button class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="prepareRegeneration()" v-show="!showKeysForm">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
-              <span>Regenerate Keys</span>
-            </button>
-        </div>
+        
       </div>
 
       <!-- Keys generating form -->
