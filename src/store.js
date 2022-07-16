@@ -142,8 +142,8 @@ const account = {
     LOGOUT: async ({ state, dispatch }) => {
       dispatch("START_LOADING", "Logging out..")
       try {
-        let loggedOut = await api.endAuthSession(state.session.token);
-        commit("updateUser", null);
+        await api.endAuthSession(state.session.token);
+        dispatch("RESET_ACCOUNT_MODULE")
         dispatch("STOP_LOADING")
           type: 'success',
           message: 'Logged out',
@@ -152,7 +152,7 @@ const account = {
         return true;
       } catch (error) {
         console.log(error)
-        commit("updateUser", null);
+        dispatch("RESET_ACCOUNT_MODULE")
         dispatch("STOP_LOADING")
         return true;
       }
