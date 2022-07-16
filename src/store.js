@@ -157,6 +157,11 @@ const account = {
         return true;
       }
     },
+    RESET_ACCOUNT_MODULE: ({commit}) => {
+      commit("updateUser", null);
+      commit("updateSession", null)
+      commit("updateApps", null)
+    }
   },
 }
 
