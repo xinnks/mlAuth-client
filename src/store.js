@@ -183,8 +183,11 @@ export const store = createStore({
     CLEAR_NOTIFICATION({commit}){
       commit('clearNotification')
     },
-    LOADING({commit}, data = null){
-      commit('updateLoading', data)
+    START_LOADING({commit}, message){
+      commit('updateLoading', {show: true, message})
+    },
+    STOP_LOADING({commit}){
+      commit('updateLoading', {show: false})
     },
     SAVE_TEMP_DATA({commit}, data){
       commit('updateTempData', data)
