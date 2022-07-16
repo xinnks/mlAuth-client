@@ -30,14 +30,16 @@ const account = {
   },
   actions: {
     CREATE_ACCOUNT: async ({ commit }, data) => {
+      dispatch("START_LOADING", "Creating Account..")
       try {
-        const response = await api.createAccount(data)
+        await api.createAccount(data)
+        dispatch("STOP_LOADING")
         commit("notify", {
-          show: true,
           message: 'Open the link we\'ve sent to your email to verify account',
           type: "success",
         });
       } catch (error) {
+        dispatch("STOP_LOADING")
         commit("notify", {
           show: true,
           message: error.message,
@@ -45,15 +47,18 @@ const account = {
         });
       }
     },
-    VERIFY_APP: async ({ commit, state }, token) => {
+    VERIFY_APP: async ({ commit, dispatch }, token) => {
+      dispatch("START_LOADING", "Verifying Account..")
       try {
         await api.verifyAccount(token);
+        dispatch("STOP_LOADING")
         commit("notify", {
           message: "Account Verified. Proceed to logging in.",
           type: "success",
         });
         return true;
       } catch (error) {
+        dispatch("STOP_LOADING")
         commit("notify", {
           message: "Failed to verify account. Please reload the page.",
           type: "error",
@@ -62,17 +67,20 @@ const account = {
       }
     },
     LOGIN: async ({ commit, dispatch }, email) => {
+      dispatch("START_LOADING", "Sending magic link..")
       try{
-        let request = await api.createLoginRequest(email)
-        commit('notify', {show: true, type: 'success', message: 'Open the link in your email to login.', timeout: 10000})
+        await api.createLoginRequest(email)
+        dispatch("STOP_LOADING")
         return true
       } catch(error){
+        dispatch("STOP_LOADING")
         console.log(error)
         commit('notify', {type: 'error', message: 'Failed to login', timeout: 10000})
         return false
       }
     },
     AUTHENTICATE: async ({ commit, dispatch }, token) => {
+      dispatch("START_LOADING", "Authenticating..")
       try{
         let response = await api.createAuthSession(token);
         let {magicLink, session, account} = response
@@ -83,9 +91,11 @@ const account = {
           message: 'Logged in',
           timeout: 10000
         })
+        dispatch("STOP_LOADING")
         return true
       } catch(error){
         console.log(error)
+        dispatch("STOP_LOADING")
         commit('notify', {
           type: 'error',
           message: 'Failed to login',
@@ -129,12 +139,12 @@ const account = {
         });
       }
     },
-    LOGOUT: async ({ commit, state }) => {
+    LOGOUT: async ({ state, dispatch }) => {
+      dispatch("START_LOADING", "Logging out..")
       try {
         let loggedOut = await api.endAuthSession(state.session.token);
         commit("updateUser", null);
-        commit("updateSession", null)
-        commit('notify', {
+        dispatch("STOP_LOADING")
           type: 'success',
           message: 'Logged out',
           timeout: 3000
@@ -143,7 +153,7 @@ const account = {
       } catch (error) {
         console.log(error)
         commit("updateUser", null);
-        commit("updateSession", null)
+        dispatch("STOP_LOADING")
         return true;
       }
     },
