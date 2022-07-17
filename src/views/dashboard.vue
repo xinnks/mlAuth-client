@@ -19,23 +19,35 @@ watch(accountInfo, (val) => {
   }
 }, {immediate: true})
 
-let newKey = reactive({
-  title: "Login",
+let newApp = reactive({
+  title: "New App",
   fields: {
+    appName: {
+      label: "App Name",
+      type: "text",
+      value: "",
+      error: false
+    },
     callbackUrl: {
       label: "Callback Url",
       type: "text",
       value: "",
       error: false
     },
-    lifespan: {
+    lifeSpan: {
       label: "Life Span",
       type: "number",
-      value: "",
+      value: 1800000,
+      error: false
+    },
+    production: {
+      label: "Environment",
+      type: "checkbox",
+      value: 0,
       error: false
     }
   },
-  actionLabel: "Login"
+  actionLabel: "Create"
 })
 let { callbackUrl, lifespan } = newKey.fields
 
