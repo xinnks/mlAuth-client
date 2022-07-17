@@ -5,6 +5,17 @@ import { Vars } from "./config";
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage
 })
+
+const processError = (error, {dispatch}) => {
+  let message = "Unknown Error"
+  if(error instanceof FetchError){
+    message = error.data ? error.data.message : message
+    if(error.response.status === (401 || 403)){
+      dispatch("LOGOUT")
+    }
+  }
+  return message
+}
   
 const account = {
   state: {
