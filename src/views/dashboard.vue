@@ -59,7 +59,10 @@ const prepareRegeneration = () => {
   showKeysForm.value = true
 }
 
-const hide = (val) => val ? val.split('').map(i => "*").join("") : ''
+const cancelNewApp = () => {
+  showAppForm.value = false
+  newApp = tempForm
+}
 
 const generateKeys = () => {
   if(callbackUrl.value === "") return missing("Callback Url", callbackUrl)
