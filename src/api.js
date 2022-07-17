@@ -30,6 +30,10 @@ export const api = {
     return api.provider().generateKeys(data, token);
   },
 
+  deleteApp: (data, token) => {
+    return api.provider().deleteApp(data, token);
+  },
+
   createLoginRequest: (email) => {
     return api.provider().login(email);
   },
