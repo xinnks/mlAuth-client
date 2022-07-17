@@ -99,7 +99,24 @@ export default class mlAuth {
 				body: { ...data, sessionToken }
 			})
 		} catch (error) {
-			throw new Error(error)
+			console.log({error})
+			throw error
+		}
+	}
+
+	/**
+	 * App keys generation request
+	 */
+	async deleteApp({data, sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		if(!data.app_id) throw new Error("app_id is missing")
+		try {
+			return this.client(`/service/delete-app`, {
+				body: { ...data, sessionToken }
+			})
+		} catch (error) {
+			console.log({error})
+			throw error
 		}
 	}
 
