@@ -69,11 +69,22 @@ const createApp = () => {
   store.dispatch('CREATE_APP', finalData);
 }
 
-watch(route.path, () => {
-  if(accountInfo.value.secret !== undefined){
-    forgetSecret()
-  }
-})
+/**
+ * @description Generates new keys for an app and displays the newly created secret
+ * @param {String} appId - App's id
+ */
+const generateKeys = async (appId) => {
+  const newKeys = await store.dispatch('GENERATE_KEYS',{app_id: appId});
+  if(newKeys)
+    visibleSecrets.value[appId] = newKeys.secret
+}
+
+/**
+ * @description Deletes an app
+ */
+const deleteApp = async (appId) => {
+  await store.dispatch('DELETE_APP', appId)
+}
 
 const forgetSecret = () => {
   accountInfo.value.secret = ""
@@ -167,7 +178,7 @@ const missing = (field, val, syntax = true) => {
                 </code>
               </div>
               <div class="flex py-2 align-center">
-                <button class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="showAppForm = true">
+                <button class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="generateKeys(app.id)">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M10.758 11.828l7.849-7.849 1.414 1.414-1.414 1.415 2.474 2.474-1.414 1.415-2.475-2.475-1.414 1.414 2.121 2.121-1.414 1.415-2.121-2.122-2.192 2.192a5.002 5.002 0 0 1-7.708 6.294 5 5 0 0 1 6.294-7.708zm-.637 6.293A3 3 0 1 0 5.88 13.88a3 3 0 0 0 4.242 4.242z"/></svg>
                   <span>Change Keys</span>
                 </button>
