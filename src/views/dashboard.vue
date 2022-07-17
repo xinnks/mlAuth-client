@@ -69,6 +69,11 @@ const generateKeys = () => {
   if(!/https?:\/\/[\d\w]+((\.\w{2,})|(:\d{4}))/gi.test(callbackUrl.value)) return missing("Callback Url", callbackUrl, false)
 
 const createApp = () => {
+
+/**
+ * @description Submit a form for creating a new app
+ */
+const createApp = async () => {
   if(appName.value === "")
     return missing("App Name", appName)
   if(callbackUrl.value === "")
@@ -83,7 +88,10 @@ const createApp = () => {
     production: production === "checked"
   }
 
-  store.dispatch('CREATE_APP', finalData);
+  if(await store.dispatch('CREATE_APP', finalData)){
+    // visibleSecrets.value[createdApp.id] = createdApp.secret
+    cancelNewApp()
+  }
 }
 
 /**
