@@ -51,6 +51,8 @@ let newApp = reactive({
 })
 let { callbackUrl, lifespan } = newKey.fields
 
+let {appName, callbackUrl, lifeSpan, production} = newApp.fields
+
 const prepareRegeneration = () => {
   callbackUrl.value = accountInfo.value.callbackUrl
   lifespan.value = accountInfo.value.lifespan
