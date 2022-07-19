@@ -11,13 +11,19 @@ let showKeysForm = ref(false);
 let hasKeys = ref(false);
 let hideSecret = ref(true);
 
-let accountInfo = computed(() => store.getters.getUser)
-
-watch(accountInfo, (val) => {
-  if(val){
-    hasKeys = !!val.client
-  }
-}, {immediate: true})
+/**
+ * @description Create an array to store content hide states for apps in user's app list
+ * */
+watch(apps, (appsList) => {
+    hideApps.value = {};
+    if(appsList && appsList.length){
+      appsList.forEach(app => {
+        hideApps.value[app.id] = true
+      })
+    }
+  }, {
+  immediate: true
+})
 
 let newApp = reactive({
   title: "New App",
