@@ -82,6 +82,12 @@ const account = {
       try{
         await api.createLoginRequest(email)
         dispatch("STOP_LOADING")
+        commit('notify', {
+          show: true,
+          type: 'success',
+          message: 'Open the link in your email to login.',
+          timeout: 10000
+        })
         return true
       } catch(error){
         dispatch("STOP_LOADING")
