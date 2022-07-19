@@ -15,6 +15,16 @@ const logOut = async () => {
     router.replace('/login');
   }
 }
+
+/**
+ * @description Auto logout when session is nullified
+ * */
+watch(session, (val) => {
+  if(!val){
+    console.log("Logging out! [navigation] ", val)
+    router.replace("/login")
+  }
+})
 </script>
 
 <template>
