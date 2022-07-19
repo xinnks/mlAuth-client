@@ -142,12 +142,32 @@ const account = {
         return false
       }
     },
-        console.log(error)
+    GENERATE_KEYS: async ({ commit, state, dispatch }, data) => {
+      dispatch("START_LOADING", "Regenerating app keys..")
+      try {
+        const response = await api.generateKeys({
+          data,
+          sessionToken: state.session.token
+        });
+        dispatch("STOP_LOADING")
+        const { app, message } = response
+        commit("updateAppKeys", app)
         commit("notify", {
-          show: true,
+          message: `New Keys created for ${app.name}. Store the secret somewhere as it will only be shown once.`,
+          type: "success",
+          timeout: 25000
+        });
+        return app
+      } catch (error) {
+        dispatch("STOP_LOADING")
+        processError(error, {dispatch})
+        commit("notify", {
           message: "Failed to generate keys",
           type: "error",
         });
+        return false
+      }
+    },
       }
     },
     LOGOUT: async ({ state, dispatch }) => {
