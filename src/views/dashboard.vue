@@ -111,8 +111,17 @@ const deleteApp = async (appId) => {
   await store.dispatch('DELETE_APP', appId)
 }
 
-const forgetSecret = () => {
-  accountInfo.value.secret = ""
+/**
+ * @description Copies passed text to clipboard
+ * @param {String} text
+ * */
+const copyToClipboard = async(text) => {
+  navigator.clipboard.writeText(text).then(() => {
+    store.commit("notify", {
+      message: "Copied to clipboard",
+      type: "success"
+    })
+  })
 }
 
 const missing = (field, val, syntax = true) => {
@@ -195,12 +204,18 @@ const missing = (field, val, syntax = true) => {
               <div class="flex py-1">
                 <span class="font-semibold pr-4">Client: </span> 
                 <span class="overflow-x-auto">{{app.client}}</span>
+                <button class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(app.client)">
+                  Copy
+                </button>
               </div>
               <div class="flex py-1">
                 <span class="font-semibold pr-4">Secret: </span> 
                 <code class="w-full relative">
                 {{app.secret || "***********************"}}
                 </code>
+                <button v-if="visibleSecrets[app.id]" class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(visibleSecrets[app.id])">
+                  Copy
+                </button>
               </div>
               <div class="flex py-2 align-center">
                 <button class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="generateKeys(app.id)">
