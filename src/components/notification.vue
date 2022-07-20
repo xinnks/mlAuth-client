@@ -26,7 +26,7 @@ watch(noty, (val) => {
 
 <template>
   <div v-if="noty">
-    <div v-show="noty.show" :class="`border ${notyClasses[noty.type]} px-4 py-3 rounded relative`" role="alert">
+    <div v-show="noty.show" :class="`border ${notyClasses[noty.type]} px-4 py-2 rounded relative`" role="alert">
       <span class="block sm:inline">{{ noty.message }}</span>
       <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
       </span>

@@ -207,14 +207,14 @@ const missing = (field, val, syntax = true) => {
               <div class="flex py-1">
                 <span class="font-semibold pr-4">Magic Link Timeout: </span> {{ timeInMinutes(app.magicLinkTimeout) }}
               </div>
-              <div class="flex py-1">
+              <div class="flex py-1 relative space-x-2">
                 <span class="font-semibold pr-4">Client: </span> 
                 <span class="overflow-x-auto">{{app.client}}</span>
                 <button class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(app.client)">
                   Copy
                 </button>
               </div>
-              <div class="flex py-1">
+              <div class="flex py-1 relative space-x-2">
                 <span class="font-semibold pr-4">Secret: </span> 
                 <code class="w-full relative">
                 {{app.secret || "***********************"}}
