@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref, watch, reactive } from 'vue';
+import { computed, ref, watch, reactive, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import page from './../layouts/page.vue'
@@ -59,10 +59,10 @@ const tempForm = JSON.parse(JSON.stringify(newApp))
 
 let {appName, callbackUrl, lifeSpan, production} = newApp.fields
 
-const prepareRegeneration = () => {
-  callbackUrl.value = accountInfo.value.callbackUrl
-  lifespan.value = accountInfo.value.lifespan
-  showKeysForm.value = true
+// clear all visible secrets on component mount
+onMounted(() => {
+  visibleSecrets.value = {};
+}, {immediate: true})
 }
 
 const cancelNewApp = () => {
@@ -221,9 +221,9 @@ const missing = (field, val, syntax = true) => {
               </div>
               <div class="flex py-1 relative space-x-2">
                 <span class="font-semibold pr-4">Secret: </span> 
-                <code class="w-full relative">
-                {{app.secret || "***********************"}}
-                </code>
+                <span class="overflow-x-auto flex-1">
+                {{app.secret || visibleSecrets[app.id] || "***********************"}}
+                </span>
                 <button v-if="visibleSecrets[app.id]" class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(visibleSecrets[app.id])">
                   Copy
                 </button>
