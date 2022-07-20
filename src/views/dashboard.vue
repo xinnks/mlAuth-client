@@ -261,5 +261,8 @@ const missing = (field, val, syntax = true) => {
   </page>
 </template>
 
-<style>
+<style scoped>
+input[type="checkbox"]::checked{
+  background: blue;
+}
 </style>
