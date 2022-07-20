@@ -174,6 +174,26 @@ const account = {
         return false
       }
     },
+    DELETE_APP: async ({ commit, state, dispatch }, appId) => {
+      dispatch("START_LOADING", "Deleting app..")
+      try {
+        const response = await api.deleteApp({
+        data: {
+          app_id: appId
+        },
+          sessionToken: state.session.token
+        });
+        dispatch("STOP_LOADING")
+        console.log({response})
+        commit('deleteApp', appId);
+      } catch (error) {
+        dispatch("STOP_LOADING")
+        let errorMessage = processError(error, {dispatch})
+        commit("notify", {
+          message: errorMessage || "Unknown Error",
+          type: "error",
+        });
+        return false
       }
     },
     LOGOUT: async ({ state, dispatch }) => {

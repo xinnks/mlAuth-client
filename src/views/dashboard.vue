@@ -198,7 +198,12 @@ const missing = (field, val, syntax = true) => {
           <div class="w-full inline-flex flex-col justify-center ring-2 ring-gray-300 px-6 pb-6 pt-2 rounded-2xl relative">
             <div class="flex pt-2 pb-3 mb-2 border-b-2 justify-between" :class="{'border-red-300': !app.production, 'border-green-300': app.production}">
               <span class="font-semibold">{{app.name}}</span>
-              <button @click="hideApps[app.id] = !hideApps[app.id]">{{hideApps[app.id] ? "more info" : "hide"}}</button>
+              <div class="inline-flex space-x-2">
+                <button title="Show app details" @click="hideApps[app.id] = !hideApps[app.id]">{{hideApps[app.id] ? "more info" : "hide"}}</button>
+                <button title="Delete app" @click="deleteApp(app.id)" class="text-white bg-red-500 p-1 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z"/></svg>
+                </button>
+              </div>
             </div>
             <div class="flex flex-col" :class="{'hidden' : hideApps[app.id]}">
               <div class="flex py-1">
