@@ -3,16 +3,22 @@ import { $fetch } from "ohmyfetch"
 export default class mlAuth {
 
 	constructor({key, secret}){
-		this.endpoint = "https://ml-auth.ml"
-		const customFetch = $fetch.create({
+		this.endpoint = "https://api.mlauth.ml"
+		let credentials;
+		if(window){
+			credentials = btoa(`${key}:${secret}`)
+		} else {
+			let buffer = Buffer.from(`${key}:${secret}`, "utf8")
+			credentials = buffer.toString("base64");
+		}
+		this.client = $fetch.create({
 			baseURL: this.endpoint,
 			method: 'POST',
 			headers: {
 		    Accept: 'application/json',
-  			"Authorization": `Basic `+ btoa(`${key}:${secret}`)
+  			"Authorization": `Basic ${credentials}`
 		  }
 		})
-		this.client = customFetch
 	}
 
 	/**
