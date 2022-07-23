@@ -117,7 +117,8 @@ const account = {
         let response = await api.createAuthSession(token);
         let {magicLink, session, account} = response
         commit('updateSession', session);
-        commit('updateUser', account);
+        commit('updateUser', user);
+        commit('updateApps', apps);
         commit('notify', {
           type: 'success',
           message: 'Logged in',
@@ -126,11 +127,11 @@ const account = {
         dispatch("STOP_LOADING")
         return true
       } catch(error){
-        console.log(error)
+        let errorMessage = processError(error, {dispatch})
         dispatch("STOP_LOADING")
         commit('notify', {
           type: 'error',
-          message: 'Failed to login',
+          message: errorMessage,
           timeout: 10000
         })
         return false
