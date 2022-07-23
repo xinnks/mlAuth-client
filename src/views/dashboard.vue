@@ -7,9 +7,12 @@ import page from './../layouts/page.vue'
 const store = useStore();
 const route = useRoute();
 
-let showKeysForm = ref(false);
+let showAppForm = ref(false);
 let showAppUpdateForm = ref(false);
-let hideSecret = ref(true);
+let hideApps = ref({})
+let visibleSecrets = ref({})
+let accountInfo = computed(() => store.getters.getUser) // redundant
+let apps = computed(() => store.getters.getApps)
 
 /**
  * @description Create an array to store content hide states for apps in user's app list
