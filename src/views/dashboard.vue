@@ -184,6 +184,9 @@ const generateKeys = async (appId) => {
 
 /**
  * @description Deletes an app
+ * @param {Object} data - App data
+ * @param {String} data.id - App id
+ * @param {String} data.name - App name
  */
 const deleteApp = async ({id, name}) => {
   if(confirm(`Delete ${name}?`)) await store.dispatch('DELETE_APP', id)
@@ -203,6 +206,13 @@ const copyToClipboard = async(text) => {
 }
 
 const missing = (field, val, syntax = true) => {
+/**
+ * @description Notifies on form errors
+ * @param {String} field - Name of form field
+ * @param {Object} val - Object value being examined
+ * @param {Bool} format - Whether this is a variable content format issue or not
+ * */
+const missing = (field, val, format = true) => {
   store.commit(
     'notify',
     {message:`${field} ${syntax ? 'cannot be empty':'is not valid'}`, type: "error"}
