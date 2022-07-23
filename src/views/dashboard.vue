@@ -342,22 +342,11 @@ const missing = (field, val, syntax = true) => {
         
       </div>
 
-      <!-- Keys generating form -->
-      <div class="w-full inline-flex flex-col p-6 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4" v-if="showKeysForm">
-        <span class="inline-flex items-center">
-          <label class="w-1/4 py-1 px-3">Callback Url: </label>
-          <input type="text" v-model.number="callbackUrl.value" class="w-3/4 bg-blue-50 appearance-none border-2 border-blue-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-        </span>
-        <span class="inline-flex items-center">
-          <label class="w-1/4 py-1 px-3">Lifespan: </label>
-          <input type="number" v-model.number="lifespan.value" class="w-3/4 bg-blue-50 appearance-none border-2 border-blue-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-        </span>
-        <div class="inline-flex justify-center">
-          <button @click.prevent="generateKeys()" class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
-            <span>{{ hasKeys ? 'Update' : 'Generate'}} Keys</span>
-          </button>
-        </div>
+      <div class="w-full flex justify-center mt-3 py-2">
+        <button title="Add new app" class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="prepareNewApp()" v-show="!showAppForm">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
+          <span>New App</span>
+        </button>
       </div>
     </template>
   </page>
