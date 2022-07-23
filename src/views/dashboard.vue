@@ -315,8 +315,10 @@ const missing = (field, val, format = true) => {
             <div class="flex pt-2 pb-3 mb-2 border-b-2 justify-between" :class="{'border-red-300': !app.production, 'border-green-300': app.production}">
               <span class="font-semibold">{{app.name}}</span>
               <div class="inline-flex space-x-2">
-                <button title="Show app details" @click="hideApps[app.id] = !hideApps[app.id]">{{hideApps[app.id] ? "more info" : "hide"}}</button>
-                <button title="Delete app" @click="deleteApp(app.id)" class="text-white bg-red-500 p-1 rounded-lg">
+                <button :title="hideApps[app.id] ? 'Show app details' : 'Hide app details'" @click="hideApps[app.id] = !hideApps[app.id]" class="text-gray-700 bg-primary-400 hover:bg-primary-500 p-1 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5" v-if="hideApps[app.id]"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5" v-else><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z"/></svg>
+                </button>
                 <button title="Edit app details" @click="prepareAppUpdate(app)" class="text-white bg-gray-700 hover:bg-gray-800 p-1 rounded-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.414 16L16.556 5.858l-1.414-1.414L5 14.586V16h1.414zm.829 2H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z"/></svg>
                 </button>
