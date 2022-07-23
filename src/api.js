@@ -22,7 +22,7 @@ export const api = {
     return api.provider().verifyAccount(token);
   },
 
-  createApp: (data, token) => {
+  createApp: (data) => {
     return api.provider().createApp(data);
   },
 
