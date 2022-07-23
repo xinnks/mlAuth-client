@@ -97,8 +97,9 @@ const createApp = async () => {
     production: production === "checked"
   }
 
-  if(await store.dispatch('CREATE_APP', finalData)){
-    // visibleSecrets.value[createdApp.id] = createdApp.secret
+  const addedApp =  await store.dispatch('CREATE_APP', finalData)
+  if(addedApp) {
+    visibleSecrets.value[addedApp.id] = addedApp.secret
     cancelNewApp()
   }
 }
