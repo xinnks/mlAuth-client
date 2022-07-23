@@ -185,8 +185,8 @@ const generateKeys = async (appId) => {
 /**
  * @description Deletes an app
  */
-const deleteApp = async (appId) => {
-  await store.dispatch('DELETE_APP', appId)
+const deleteApp = async ({id, name}) => {
+  if(confirm(`Delete ${name}?`)) await store.dispatch('DELETE_APP', id)
 }
 
 /**
