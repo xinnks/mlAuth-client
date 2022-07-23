@@ -1,7 +1,7 @@
+import { FetchError } from "ohmyfetch";
 import { createStore } from "vuex";
 import VuexPersistence from "vuex-persist";
 import { api } from "./api";
-import { Vars } from "./config";
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage
 })
