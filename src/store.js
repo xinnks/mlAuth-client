@@ -241,17 +241,11 @@ const account = {
         await api.endAuthSession(state.session.token);
         dispatch("RESET_ACCOUNT_MODULE")
         dispatch("STOP_LOADING")
-          type: 'success',
-          message: 'Logged out',
-          timeout: 3000
-        })
-        return true;
       } catch (error) {
-        console.log(error)
         dispatch("RESET_ACCOUNT_MODULE")
         dispatch("STOP_LOADING")
-        return true;
       }
+      return true
     },
     RESET_ACCOUNT_MODULE: ({commit}) => {
       commit("updateUser", null);
