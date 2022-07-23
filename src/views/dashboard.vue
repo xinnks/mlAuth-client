@@ -215,7 +215,7 @@ const missing = (field, val, syntax = true) => {
 const missing = (field, val, format = true) => {
   store.commit(
     'notify',
-    {message:`${field} ${syntax ? 'cannot be empty':'is not valid'}`, type: "error"}
+    {message:`${field} ${format ? 'cannot be empty':'is not valid'}`, type: "error"}
   )
   val.error = true
 }
@@ -224,16 +224,6 @@ const missing = (field, val, format = true) => {
 <template>
   <page>
     <template #page>
-    <em>{{accountInfo}}</em>
-      <div class="flex flex-col space-y-3 p-2" v-if="accountInfo">
-        <h1 class="text-xl font-semibold">Account Info</h1>
-        <div class="flex space-x-4">
-          Name: {{accountInfo.firstName}} {{accountInfo.lastName}}
-        </div>
-        <div class="flex space-x-4">
-          Email: {{accountInfo.email}}
-        </div>
-      </div>
 
       <div class="mt-8">
         <div class="w-full inline-flex items-center justify-between ring-2 ring-primary-800 px-3 py-2 rounded-2xl bg-white">
