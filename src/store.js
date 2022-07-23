@@ -278,6 +278,7 @@ export const store = createStore({
         show: show || true,
         message,
         type: type || "info",
+        timeout: timeout || 5000
       }
     },
     clearNotification(state){
