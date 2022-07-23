@@ -54,7 +54,7 @@ export default class mlAuth {
 	/**
 	 * Registers a new app to the service
 	 */
-	async createApp(data){
+	async registerUser(data){
 		if(!data) throw new Error("user data is missing")
 		try {
 			return this.client(`/auth/register`, {

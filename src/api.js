@@ -15,7 +15,7 @@ export const api = {
   },
 
   createAccount: (data) => {
-    return api.provider().createApp(data);
+    return api.provider().registerUser(data);
   },
 
   verifyAccount: (token) => {
