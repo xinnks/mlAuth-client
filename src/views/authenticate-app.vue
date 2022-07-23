@@ -14,6 +14,7 @@ const authenticate = async () => {
 
   const login = await store.dispatch('AUTHENTICATE', token);
   if(login) router.replace('/dashboard')
+  router.replace("/login")
 }
 
 const missing = (message) => {
