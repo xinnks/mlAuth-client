@@ -66,6 +66,9 @@ let {appName, callbackUrl, lifeSpan, production} = newApp.fields
 onMounted(() => {
   visibleSecrets.value = {};
 }, {immediate: true})
+
+const prepareNewApp = () => {
+  showAppForm.value = true
 }
 
 const cancelNewApp = () => {
