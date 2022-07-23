@@ -37,10 +37,21 @@ const account = {
     },
     updateApps(state, payload){
       state.apps = payload
+    },
+    addNewApp(state, app){
+      if(!state.apps) state.apps = []
+      state.apps.push(app)
+    },
+    deleteApp(state, appId){
+      state.apps = state.apps.filter(app => app.id !== appId)
+    },
     updateApp(state, app){
       const appIndex = state.apps.findIndex(item => item.id === app.id)
       state.apps[appIndex] = app
     },
+    updateAppKeys(state, {id, client}){
+      const index = state.apps.findIndex(app => app.id === id)
+      state.apps[index].client = client
     }
   },
   actions: {
