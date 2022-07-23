@@ -147,18 +147,15 @@ const account = {
         dispatch("STOP_LOADING")
         console.log({response})
         let { app } = response
-        let tempApp = Object.assign({},app)
+        let tempApp = {...app}
         delete app.secret
-        commit('updateApps', state.apps ? state.apps.push(app) : app);
+        commit('addNewApp', app);
         return tempApp
       } catch (error) {
         dispatch("STOP_LOADING")
-        let errorMessage = "Unknown error";
-        if(error instanceof FetchError){
-          errorMessage = error.data ? error.data.message : "App already exists"
-        }
+        let errorMessage = processError(error, {dispatch})
         commit("notify", {
-          message: errorMessage,
+          message: errorMessage || "Unknown Error",
           type: "error",
         });
         return false
