@@ -322,6 +322,7 @@ const missing = (field, val, format = true) => {
                 <button title="Edit app details" @click="prepareAppUpdate(app)" class="text-white bg-gray-700 hover:bg-gray-800 p-1 rounded-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.414 16L16.556 5.858l-1.414-1.414L5 14.586V16h1.414zm.829 2H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z"/></svg>
                 </button>
+                <button title="Delete app" @click="deleteApp(app)" class="text-white bg-red-500 hover:bg-red-600 p-1 rounded-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z"/></svg>
                 </button>
               </div>
@@ -335,8 +336,10 @@ const missing = (field, val, format = true) => {
               </div>
               <div class="flex py-1 relative space-x-2">
                 <span class="font-semibold pr-4">Client: </span> 
-                <span class="overflow-x-auto">{{app.client}}</span>
-                <button class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(app.client)">
+                <span class="overflow-x-auto flex-1">
+                  {{app.client}}
+                </span>
+                <button title="Copy client key" class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(app.client)">
                   Copy
                 </button>
               </div>
@@ -345,12 +348,12 @@ const missing = (field, val, format = true) => {
                 <span class="overflow-x-auto flex-1">
                 {{app.secret || visibleSecrets[app.id] || "***********************"}}
                 </span>
-                <button v-if="visibleSecrets[app.id]" class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(visibleSecrets[app.id])">
+                <button title="Copy secret key" v-if="visibleSecrets[app.id]" class="bg-gray-700 text-white text-sm ring-gray-300 hover:bg-gray-900 hover:text-white rounded-full inline-flex items-center justify-center px-2 ring-0 hover:ring-black dark:ring-2" @click="copyToClipboard(visibleSecrets[app.id])">
                   Copy
                 </button>
               </div>
               <div class="flex py-2 align-center">
-                <button class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="generateKeys(app.id)">
+                <button title="Change app keys" class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="generateKeys(app.id)">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M10.758 11.828l7.849-7.849 1.414 1.414-1.414 1.415 2.474 2.474-1.414 1.415-2.475-2.475-1.414 1.414 2.121 2.121-1.414 1.415-2.121-2.122-2.192 2.192a5.002 5.002 0 0 1-7.708 6.294 5 5 0 0 1 6.294-7.708zm-.637 6.293A3 3 0 1 0 5.88 13.88a3 3 0 0 0 4.242 4.242z"/></svg>
                   <span>Change Keys</span>
                 </button>
