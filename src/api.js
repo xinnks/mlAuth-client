@@ -23,7 +23,11 @@ export const api = {
   },
 
   createApp: (data, token) => {
-    return api.provider().createApp(data, token);
+    return api.provider().createApp(data);
+  },
+
+  updateApp: (data) => {
+    return api.provider().updateApp(data);
   },
 
   generateKeys: (data, token) => {

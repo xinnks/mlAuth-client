@@ -8,7 +8,7 @@ const store = useStore();
 const route = useRoute();
 
 let showKeysForm = ref(false);
-let hasKeys = ref(false);
+let showAppUpdateForm = ref(false);
 let hideSecret = ref(true);
 
 /**
@@ -97,6 +97,71 @@ const createApp = async () => {
   if(await store.dispatch('CREATE_APP', finalData)){
     // visibleSecrets.value[createdApp.id] = createdApp.secret
     cancelNewApp()
+  }
+}
+
+let appChanges = reactive({
+  id: "",
+  fields: {
+    updateAppName: {
+      value: "",
+      error: false
+    },
+    updateCallbackUrl: {
+      value: "",
+      error: false
+    },
+    updateLifeSpan: {
+      value: 1800000,
+      error: false
+    },
+    updateProduction: {
+      value: 0,
+      error: false
+    }
+  }
+})
+const tempUpdateForm = JSON.parse(JSON.stringify(appChanges))
+let {updateAppName, updateCallbackUrl, updateLifeSpan, updateProduction} = appChanges.fields
+
+/**
+ * @description Prepares UI for app update state
+ * @param {Object} appToUpdate - Details of app being updated
+ * */
+const prepareAppUpdate = (appToUpdate) => {
+  showAppUpdateForm.value = true
+  appChanges.id = appToUpdate.id
+  ;({name: updateAppName.value, callbackUrl: updateCallbackUrl.value, magicLinkTimeout: updateLifeSpan.value, production: updateProduction.value} = appToUpdate)
+}
+
+const cancelAppUpdate = () => {
+  showAppUpdateForm.value = false
+  newApp = tempUpdateForm
+}
+
+/**
+ * @description Submit a form for updating app details
+ */
+const updateApp = async () => {
+  if(appChanges.id === "")
+    return;
+  if(updateAppName.value === "")
+    return missing("App Name", updateAppName)
+  if(updateCallbackUrl.value === "")
+    return missing("Callback Url", updateCallbackUrl)
+  if(!/https?:\/\/[\d\w]+((\.\w{2,})|(:\d{4}))/gi.test(updateCallbackUrl.value))
+    return missing("Callback Url", updateCallbackUrl, false)
+
+  const appChangesData = {
+    name: updateAppName.value,
+    life_span: updateLifeSpan.value || 1800000,
+    callback_url: updateCallbackUrl.value,
+    production: updateProduction.value === "checked",
+    app_id: appChanges.id
+  }
+
+  if(await store.dispatch('UPDATE_APP', appChangesData)){
+    cancelAppUpdate()
   }
 }
 
@@ -194,6 +259,40 @@ const missing = (field, val, syntax = true) => {
         </div>
         <!-- New App Form -->
 
+        <!-- App Update Form -->
+        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4" v-if="showAppUpdateForm">
+          <div class="inline-flex justify-center mb-4">
+            <span class="font-bold">Update app</span>
+          </div>
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">App Name: </label>
+            <input type="text" v-model.number="updateAppName.value" class="w-3/5 appearance-none border-2 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" :class="{'bg-red-200 border-red-300 focus:border-red-300': updateAppName.error && updateAppName.value === '', 'bg-gray-100 border-gray-500 focus:border-gray-600': !(updateAppName.error && updateAppName.value === '')}">
+          </span>
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">Callback Url: </label>
+            <input type="text" v-model.number="updateCallbackUrl.value" class="w-3/5 appearance-none border-2 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" :class="{'bg-red-200 border-red-300 focus:border-red-300': updateCallbackUrl.error && updateCallbackUrl.value === '', 'bg-gray-100 border-gray-500 focus:border-gray-600': !(updateCallbackUrl.error && updateCallbackUrl.value === '')}">
+          </span>
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">Magic Link Timeout: </label>
+            <input type="number" @keydown="numbersOnly" v-model.number="updateLifeSpan.value" class="w-3/5 bg-gray-100 appearance-none border-2 border-gray-500 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+          </span>
+          <span class="inline-flex items-center">
+            <label class="w-2/5 py-1 px-3">App Environment: </label>
+            <input type="checkbox" value="checked" v-model="updateProduction.value" class="appearance-none border-2 border-gray-500 rounded p-2 text-gray-700 leading-tight focus:outline-none focus:border-gray-500" :class="{'bg-blue-600':updateProduction.value}">
+            <span class="px-2">{{ updateProduction.value ? "Production" : "Development" }}</span>
+          </span>
+          <div class="inline-flex justify-center space-x-4">
+            <button @click.prevent="cancelAppUpdate()" class="bg-gray-300 text-gray-500 ring-gray-300 hover:bg-yellow-100 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2">
+              <span>Cancel</span>
+            </button>
+            <button @click.prevent="updateApp()" class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
+              <span>Update</span>
+            </button>
+          </div>
+        </div>
+        <!-- App Update Form -->
+
         <div v-for="(app, key) in apps" :key="key" class="inline-flex w-full px-2 py-4" v-if="!showAppForm && apps">
           <div class="w-full inline-flex flex-col justify-center ring-2 ring-gray-300 px-6 pb-6 pt-2 rounded-2xl relative">
             <div class="flex pt-2 pb-3 mb-2 border-b-2 justify-between" :class="{'border-red-300': !app.production, 'border-green-300': app.production}">
@@ -201,6 +300,9 @@ const missing = (field, val, syntax = true) => {
               <div class="inline-flex space-x-2">
                 <button title="Show app details" @click="hideApps[app.id] = !hideApps[app.id]">{{hideApps[app.id] ? "more info" : "hide"}}</button>
                 <button title="Delete app" @click="deleteApp(app.id)" class="text-white bg-red-500 p-1 rounded-lg">
+                <button title="Edit app details" @click="prepareAppUpdate(app)" class="text-white bg-gray-700 hover:bg-gray-800 p-1 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.414 16L16.556 5.858l-1.414-1.414L5 14.586V16h1.414zm.829 2H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z"/></svg>
+                </button>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z"/></svg>
                 </button>
               </div>

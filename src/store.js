@@ -37,6 +37,10 @@ const account = {
     },
     updateApps(state, payload){
       state.apps = payload
+    updateApp(state, app){
+      const appIndex = state.apps.findIndex(item => item.id === app.id)
+      state.apps[appIndex] = app
+    },
     }
   },
   actions: {
@@ -146,6 +150,32 @@ const account = {
           type: "error",
         });
         return false
+      }
+    },
+    UPDATE_APP: async ({ commit, state, dispatch }, data) => {
+      dispatch("START_LOADING", "Updating app..")
+      try {
+        const response = await api.updateApp({
+          data,
+          sessionToken: state.session.token
+        });
+        dispatch("STOP_LOADING")
+        let { app } = response
+        delete app.secret
+        commit('updateApp', app);
+        commit("notify", {
+          message: "Updated app",
+          type: "success",
+        });
+        return true
+      } catch (error) {
+        dispatch("STOP_LOADING")
+        let errorMessage = processError(error, {dispatch})
+        commit("notify", {
+          message: errorMessage || "Unknown Error",
+          type: "error",
+        });
+        return null
       }
     },
     GENERATE_KEYS: async ({ commit, state, dispatch }, data) => {
