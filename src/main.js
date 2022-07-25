@@ -10,7 +10,7 @@ router.beforeEach((to, from) => {
   if(!store.getters.getSession && to.meta.needsAuth){
     return {path: '/login'}
   }
-  if(!to.meta.needsAuth && !!store.getters.getSession){
+  if(!to.meta.needsAuth && !!store.getters.getSession && to.path !== "/docs"){
     return {path: '/dashboard'}
   }
 })
