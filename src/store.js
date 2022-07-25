@@ -210,7 +210,7 @@ const account = {
           message: "Failed to generate keys",
           type: "error",
         });
-        return false
+        return null
       }
     },
     DELETE_APP: async ({ commit, state, dispatch }, appId) => {
