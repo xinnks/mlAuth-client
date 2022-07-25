@@ -28,10 +28,21 @@ watch(session, (val) => {
 </script>
 
 <template>
-  <nav class="flex items-center justify-between flex-wrap bg-primary-300 p-6">
-    <div class="inline-flex flex-col items-center flex-shrink-0 text-bacl mr-6">
-      <span class="font-semibold text-2xl">mlAuth</span>
+  <nav class="flex items-center justify-between flex-wrap bg-primary-300 p-2 px-3">
+    <div class="flex space-x-4">
+      <router-link :to="session ? '/dashboard' : '/'" title="mlAuth">
+        <img alt="mlAuth logo" class="w-12 self-center border-2 border-gray-600 rounded-lg" src="./../assets/mlAuth.svg" />
+      </router-link>
+      <div class="inline-flex justify-between align-middle items-center flex-shrink-0 text-black mr-6">
+        <router-link v-if="session" to="/dashboard" title="Dashboard Page" class="inline-flex items-center lg:space-x-2 text-sm p-2 leading-none border-2 rounded-full border-black hover:border-transparent hover:text-primary hover:bg-black lg:mt-0" :class="route.path === '/dashboard' ? 'bg-black text-primary': 'text-black'">
+          <span class="lg:">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.5 11.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm.5 10a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm10-10a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0 10a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zM6.5 9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm.5 10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm10-10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+          </span>
+          <span class="ml-2 hidden lg:block">Dashboard</span>
+        </router-link>
+      </div>
     </div>
+
     <div class="flex justify-center space-x-4" v-if="session">
       <div class="flex flex-col space-y-3 p-2 font-bold" v-if="accountInfo">
         <div class="flex space-x-4">
