@@ -152,6 +152,7 @@ let {updateAppName, updateCallbackUrl, updateLifeSpan, updateProduction} = appCh
  * */
 const prepareAppUpdate = (appToUpdate) => {
   showAppUpdateForm.value = true
+  hideApps.value[app.id] = true
   appChanges.id = appToUpdate.id
   ;({name: updateAppName.value, callbackUrl: updateCallbackUrl.value, magicLinkTimeout: updateLifeSpan.value, production: updateProduction.value} = appToUpdate)
 }
