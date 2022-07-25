@@ -76,9 +76,17 @@ const cancelNewApp = () => {
   newApp = tempForm
 }
 
-const generateKeys = () => {
-  if(callbackUrl.value === "") return missing("Callback Url", callbackUrl)
-  if(!/https?:\/\/[\d\w]+((\.\w{2,})|(:\d{4}))/gi.test(callbackUrl.value)) return missing("Callback Url", callbackUrl, false)
+/**
+ * @description Limits the keystrokes input allowed, specific to number fields
+ * */
+const numbersOnly = (e) => {
+  if(
+    ([8,9,37,39].indexOf(e.keyCode) === -1) &&
+    (e.keyCode < 47 || (e.keyCode > 58 && e.keyCode < 96) || e.keyCode > 105)
+  ){
+    e.preventDefault()
+  }
+}
 
 const createApp = () => {
 
