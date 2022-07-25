@@ -1,14 +1,15 @@
 <script setup>
 import  { watch, computed } from 'vue';
-import { useRouter } from 'vue-router';
 import  { useStore } from 'vuex';
 
 const store = useStore();
-const router = useRouter();
+let darkMode = computed(() => store.getters.getDarkMode)
 </script>
 
 <template>
-  <router-view/>
+  <div :class="darkMode ? 'dark':''">
+    <router-view/>
+  </div>
 </template>
 
 <style>

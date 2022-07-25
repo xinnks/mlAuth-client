@@ -259,12 +259,14 @@ export const store = createStore({
   state: {
     notification: null,
     loading: null,
-    tempData: {}
+    tempData: {},
+    darkMode: false
   },
   getters: {
     getLoading: state => state.loading,
     getNotification: state => state.notification,
-    getTempData: state => state.tempData
+    getTempData: state => state.tempData,
+    getDarkMode: state => state.darkMode
   },
   mutations: {
     notify(state, {show, message, type}){
@@ -298,6 +300,10 @@ export const store = createStore({
     SAVE_TEMP_DATA({commit}, data){
       commit('updateTempData', data)
       return true;
+    },
+    TOGGLE_DARK_MODE({state}){
+      console.log("Here 2")
+      state.darkMode = !state.darkMode
     }
   },
   modules: {
