@@ -88,7 +88,14 @@ const numbersOnly = (e) => {
   }
 }
 
-const createApp = () => {
+/**
+ * @description Converts given seconds to human readable minutes string
+ * @param {Number} seconds - Number of seconds
+ * */
+const timeInMinutes = (seconds) => {
+  const minutes = Math.ceil(seconds / 60000)
+  return `${minutes} minute${minutes > 1 ? 's' : ''}`
+}
 
 /**
  * @description Submit a form for creating a new app
