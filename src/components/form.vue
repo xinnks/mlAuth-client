@@ -14,7 +14,7 @@ let loading = computed(() => store.getters.getLoading);
 
 <template>
   <h1 class="self-center text-2xl font-semibold p-8">{{ form.title }}</h1>
-  <div class="w-full sm:w-1/3 flex flex-col ring-2 ring-gray-200 bg-slate-50 shadow-sm shadow-slate-400 rounded-xl mx-auto min-w-fit">
+  <div class="w-full sm:w-1/3 flex flex-col ring-2 ring-gray-200 bg-slate-50 shadow-sm shadow-slate-400 rounded-xl mx-auto min-w-fit dark:bg-gray-800">
     <form class="flex flex-col space-y-8 p-8">
       <div class="mt-4 flex justify-center items-center" v-for="field of form.fields">
         <label class="py-1 pr-3 font-semibold w-1/4" :for="field.label">{{field.label}}</label>

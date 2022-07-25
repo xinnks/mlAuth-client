@@ -252,7 +252,7 @@ const missing = (field, val, format = true) => {
       </div>
 
         <!-- New App Form -->
-        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4" v-if="showAppForm">
+        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4 dark:bg-gray-800" v-if="showAppForm">
           <div class="inline-flex justify-center mb-4">
             <span class="font-bold">Create a new app</span>
           </div>
@@ -270,7 +270,7 @@ const missing = (field, val, format = true) => {
           </span>
           <span class="inline-flex items-center">
             <label class="w-2/5 py-1 px-3">App Environment: </label>
-            <input type="checkbox" value="checked" v-model="production.value" class="appearance-none border-2 border-gray-500 rounded p-2 text-gray-700 leading-tight focus:outline-none focus:border-gray-500" :class="{'bg-blue-600':production.value}"> 
+            <input type="checkbox" value="checked" v-model="production.value" class="appearance-none border-2 border-gray-500 rounded p-2 text-gray-700 leading-tight focus:outline-gray-500 focus:border-gray-500" :class="{'bg-gray-600 dark:bg-primary-400':production.value}"> 
             <span class="px-2">{{ production.value ? "Production" : "Development" }}</span>
           </span>
           <div class="inline-flex justify-center space-x-4">
@@ -286,7 +286,7 @@ const missing = (field, val, format = true) => {
         <!-- New App Form -->
 
         <!-- App Update Form -->
-        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4" v-if="showAppUpdateForm">
+        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4 dark:bg-gray-800" v-if="showAppUpdateForm">
           <div class="inline-flex justify-center mb-4">
             <span class="font-bold">Update app</span>
           </div>
@@ -304,7 +304,7 @@ const missing = (field, val, format = true) => {
           </span>
           <span class="inline-flex items-center">
             <label class="w-2/5 py-1 px-3">App Environment: </label>
-            <input type="checkbox" value="checked" v-model="updateProduction.value" class="appearance-none border-2 border-gray-500 rounded p-2 text-gray-700 leading-tight focus:outline-none focus:border-gray-500" :class="{'bg-blue-600':updateProduction.value}">
+            <input type="checkbox" value="checked" v-model="updateProduction.value" class="appearance-none border-2 border-gray-500 rounded p-2 text-gray-700 leading-tight focus:outline-none focus:border-gray-500" :class="{'bg-gray-600 dark:bg-primary-400':updateProduction.value}">
             <span class="px-2">{{ updateProduction.value ? "Production" : "Development" }}</span>
           </span>
           <div class="inline-flex justify-center space-x-4">
