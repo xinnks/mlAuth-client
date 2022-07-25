@@ -112,7 +112,7 @@ const createApp = async () => {
     name: appName.value,
     life_span: lifeSpan.value || 1800000,
     callback_url: callbackUrl.value,
-    production: production === "checked"
+    production: production.value === "checked"
   }
 
   const addedApp =  await store.dispatch('CREATE_APP', finalData)
