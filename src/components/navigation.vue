@@ -10,6 +10,9 @@ const route = useRoute();
 let session = computed(() => store.getters.getSession)
 let accountInfo = computed(() => store.getters.getUser)
 
+/**
+ * @description Logs user out
+ * */
 const logOut = async () => {
   let loggedOut = await store.dispatch('LOGOUT');
   if(loggedOut){
