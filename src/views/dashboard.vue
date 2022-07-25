@@ -221,7 +221,6 @@ const copyToClipboard = async(text) => {
   })
 }
 
-const missing = (field, val, syntax = true) => {
 /**
  * @description Notifies on form errors
  * @param {String} field - Name of form field
@@ -246,10 +245,6 @@ const missing = (field, val, format = true) => {
     <template #page>
 
       <div>
-          <h2 class="text-xl font-semibold">My Apps</h2>
-        </div>
-        
-      </div>
 
         <!-- New App Form -->
         <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4 dark:bg-gray-800" v-if="showAppForm">
