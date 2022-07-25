@@ -55,7 +55,7 @@ const account = {
     }
   },
   actions: {
-    CREATE_ACCOUNT: async ({ commit }, data) => {
+    CREATE_ACCOUNT: async ({ commit, dispatch }, data) => {
       dispatch("START_LOADING", "Creating Account..")
       try {
         await api.createAccount(data)
