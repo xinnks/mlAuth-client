@@ -114,7 +114,7 @@ const account = {
       dispatch("START_LOADING", "Authenticating..")
       try{
         let response = await api.createAuthSession(token);
-        let {magicLink, session, account} = response
+        let {apps, session, account: user} = response
         commit('updateSession', session);
         commit('updateUser', user);
         commit('updateApps', apps);
