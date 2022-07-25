@@ -269,7 +269,7 @@ export const store = createStore({
     getDarkMode: state => state.darkMode
   },
   mutations: {
-    notify(state, {show, message, type}){
+    notify(state, {show, message, type, timeout}){
       state.notification = {
         show: show || true,
         message,
