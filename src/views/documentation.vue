@@ -10,9 +10,9 @@
     <template #title>Documentation</template>
     <template #page>
 
-        <div class="mt-4 w-full px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h2 class="text-xl font-bold">Table of contents</h2>
-          <ul class="font-400 pl-4">
+          <ul class="font-400 pl-4 dark:text-primary">
             <li>
               <a href="#creating-an-account">Creating an account</a>
             </li>
@@ -36,7 +36,7 @@
           </ul>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800 dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="creating-an-account">Creating an account</h3>
           <p>
             To authenticate users in your project with magic links you need to first <router-link to="/register">create an account</router-link>.
@@ -50,7 +50,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="generating-app-credentials">Generating app credentials</h3>
           <p>
             Inside your dashboard under the "My Apps" clink on the "Add Keys" button.
@@ -66,7 +66,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="the -authentication-flow">The authentication flow</h3>
           <p>
             Before proceeding to the next steps, we need to understand mlAuth's authentication flow so as we can properly integrate it in our apps. We'll break the flow to the following series of simple steps<br>
@@ -78,7 +78,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="making-authentication-requests">Making authentication requests</h3>
           <p>
             Now that we understand the authentication flow, we can start making requests to mlAuth. <br>
@@ -94,7 +94,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h4 class="font-semibold" id="making-login-requests">Making login requests</h4>
           <p>
             To make login requests with the assistance of the mlAuth npm package, we need to create an instance of mlAuth providing the <strong><i>client key</i></strong> and <strong><i>client secret</i></strong> we obtained while <a href="#generating-app-credentials">generating app credentials</a>.
@@ -126,7 +126,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h4 class="font-semibold" id="making-login-verification-requests">Making login verification requests</h4>
           <p>
             To verify login requests, you need to obtain a token query parameter passed as part of the callback url.
@@ -156,10 +156,8 @@ ul {
 }
 a{
   text-decoration: underline;
-  color: #958b04
 }
 li > a {
-  color: black;
   text-decoration: none
 }
 code{
