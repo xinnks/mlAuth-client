@@ -1,10 +1,11 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 
 const store = useStore();
 const router = useRouter();
+const route = useRoute();
 
 let session = computed(() => store.getters.getSession)
 let accountInfo = computed(() => store.getters.getUser)
