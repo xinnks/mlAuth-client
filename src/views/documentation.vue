@@ -4,10 +4,11 @@
 
 <template>
   <page>
+    <template #icon>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 22H5a3 3 0 0 1-3-3V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12h4v4a3 3 0 0 1-3 3zm-1-5v2a1 1 0 0 0 2 0v-2h-2zm-2 3V4H4v15a1 1 0 0 0 1 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z"/></svg>
+    </template>
+    <template #title>Documentation</template>
     <template #page>
-        <div class="mt-4 w-full inline-flex items-center justify-between ring-2 ring-primary-800 px-3 py-2 rounded-2xl bg-white">
-          <h1 class="text-2xl font-semibold">mlAuth Documentation</h1>
-        </div>
 
         <div class="mt-4 w-full px-3 py-2 rounded-2xl bg-white">
           <h2 class="text-xl font-bold">Table of contents</h2>
