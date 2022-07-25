@@ -116,7 +116,7 @@ export default class mlAuth {
 		if(!sessionToken) throw new Error("sessionToken is missing")
 		if(!data.app_id) throw new Error("app_id is missing")
 		try {
-			return this.client.raw(`/service/generate-keys`, {
+			return this.client(`/service/generate-keys`, {
 				body: { ...data, sessionToken }
 			})
 		} catch (error) {
