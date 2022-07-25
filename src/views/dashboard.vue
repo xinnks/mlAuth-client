@@ -223,10 +223,13 @@ const missing = (field, val, format = true) => {
 
 <template>
   <page>
+    <template #icon>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.5 11.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm.5 10a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm10-10a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0 10a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zM6.5 9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm.5 10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm10-10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+    </template>
+    <template #title>My Apps</template>
     <template #page>
 
-      <div class="mt-8">
-        <div class="w-full inline-flex items-center justify-between ring-2 ring-primary-800 px-3 py-2 rounded-2xl bg-white">
+      <div>
           <h2 class="text-xl font-semibold">My Apps</h2>
         </div>
         
