@@ -48,9 +48,9 @@ watch(session, (val) => {
     </div>
 
     <div class="flex justify-center space-x-4" v-if="session">
-      <div class="flex flex-col space-y-3 p-2 font-bold" v-if="accountInfo">
+      <div class="flex flex-col space-y-3 p-2 px-0 font-bold" v-if="accountInfo">
         <div class="flex space-x-4">
-          {{accountInfo.firstName}} {{accountInfo.lastName}}
+          <span :title="`${accountInfo.firstName} ${accountInfo.lastName}`">{{accountInfo.firstName}} {{accountInfo.lastName}}</span>
         </div>
       </div>
       <router-link to="/settings" title="Settings Page" class="inline-flex items-center text-sm p-2 leading-none border-2 rounded-full border-black hover:border-transparent hover:text-primary hover:bg-black lg:mt-0" :class="route.path === '/settings' ? 'bg-black text-primary': 'text-black'">
