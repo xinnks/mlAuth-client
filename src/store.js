@@ -67,7 +67,6 @@ const account = {
       } catch (error) {
         dispatch("STOP_LOADING")
         commit("notify", {
-          show: true,
           message: error.message,
           type: "error",
         });
