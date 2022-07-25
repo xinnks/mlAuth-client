@@ -147,7 +147,7 @@
   </page>
 </template>
 
-<style>
+<style scoped>
 p {
   margin-top: 1em;
 }
