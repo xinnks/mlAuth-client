@@ -16,7 +16,7 @@ let accountInfo = computed(() => store.getters.getUser)
 const logOut = async () => {
   let loggedOut = await store.dispatch('LOGOUT');
   if(loggedOut){
-    router.replace('/login');
+    await router.replace('/login');
   }
 }
 
@@ -57,7 +57,7 @@ const toggleDarkMode = () => {
     </div>
 
     <div class="flex justify-center space-x-4" v-if="session">
-      <div class="flex flex-col space-y-3 p-2 px-0 font-bold" v-if="accountInfo">
+      <div class="flex flex-col space-y-3 p-2 px-0 font-bold hidden lg:block" v-if="accountInfo">
         <div class="flex space-x-4">
           <span :title="`${accountInfo.firstName} ${accountInfo.lastName}`">{{accountInfo.firstName}} {{accountInfo.lastName}}</span>
         </div>
