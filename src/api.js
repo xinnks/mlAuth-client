@@ -25,6 +25,11 @@ export const api = {
   updateAccount: (data) => {
     return api.provider().updateAccount(data);
   },
+
+  deleteAccount: (data) => {
+    return api.provider().deleteAccount(data);
+  },
+
   createApp: (data) => {
     return api.provider().createApp(data);
   },

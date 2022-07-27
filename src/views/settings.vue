@@ -27,6 +27,8 @@ const applyChanges = async () => {
 }
 
 const deleteAccount = async () => {
+  if(confirm("Are you sure you want to delete your account? This action can't be reversed."))
+    await store.dispatch('DELETE_ACCOUNT')
 }
 </script>
 

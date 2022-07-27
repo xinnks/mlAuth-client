@@ -116,6 +116,32 @@ const account = {
         return null
       }
     },
+    DELETE_ACCOUNT: async ({ commit, state, dispatch }) => {
+      dispatch("START_LOADING", "Deleting account..")
+      try {
+        const response = await api.deleteAccount({
+          sessionToken: state.session.token
+        });
+        dispatch("STOP_LOADING")
+        let { account } = response
+        commit('updateUser', null);
+        commit("updateSession", null)
+        commit("updateApps", null)
+        commit("notify", {
+          message: "Account deleted",
+          type: "success",
+        });
+        return true
+      } catch (error) {
+        dispatch("STOP_LOADING")
+        let errorMessage = processError(error, {dispatch})
+        commit("notify", {
+          message: errorMessage || "Unknown Error",
+          type: "error",
+        });
+        return null
+      }
+    },
     LOGIN: async ({ commit, dispatch }, email) => {
       dispatch("START_LOADING", "Sending magic link..")
       try{

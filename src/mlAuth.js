@@ -93,6 +93,22 @@ export default class mlAuth {
 			throw new Error(error)
 		}
 	}
+
+	/**
+	 * @description Deletes an account
+	 */
+	async deleteAccount({sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		try {
+			return this.client(`/service/delete-account`, {
+				body: { sessionToken }
+			})
+		} catch (error) {
+			throw new Error(error)
+		}
+	}
+
+	/**
 	 * @description Creates a new app
 	 */
 	async createApp({data, sessionToken}){
