@@ -58,6 +58,7 @@ let newApp = reactive({
   },
   actionLabel: "Create"
 })
+
 const tempForm = JSON.parse(JSON.stringify(newApp))
 
 let {appName, callbackUrl, lifeSpan, production} = newApp.fields
