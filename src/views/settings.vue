@@ -13,7 +13,8 @@ let userCopy = reactive({
 
 watch(user, (data) => {
   const {firstName, lastName} = {...data}
-  userCopy = {firstName, lastName}
+  userCopy.firstName = firstName
+  userCopy.lastName = lastName
 }, {
   immediate: true
 })
