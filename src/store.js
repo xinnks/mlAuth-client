@@ -99,10 +99,10 @@ const account = {
           sessionToken: state.session.token
         });
         dispatch("STOP_LOADING")
-        let { account } = response
+        let { account, message } = response
         commit('updateUser', account);
         commit("notify", {
-          message: "Account info updated",
+          message: message || "Account info updated",
           type: "success",
         });
         return true
