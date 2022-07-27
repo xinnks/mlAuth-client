@@ -80,6 +80,19 @@ export default class mlAuth {
 	}
 
 	/**
+	 * @description Updates a user's details
+	 */
+	async updateAccount({data, sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		if(!data) throw new Error("data is missing")
+		try {
+			return this.client(`/service/update-account`, {
+				body: { ...data, sessionToken }
+			})
+		} catch (error) {
+			throw new Error(error)
+		}
+	}
 	 * @description Creates a new app
 	 */
 	async createApp({data, sessionToken}){

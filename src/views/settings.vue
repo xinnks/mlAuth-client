@@ -19,6 +19,11 @@ watch(user, (data) => {
 })
 
 const applyChanges = async () => {
+  let {firstName, lastName} = userCopy
+  await store.dispatch('UPDATE_ACCOUNT', {
+    first_name: firstName,
+    last_name: lastName
+  })
 }
 
 const deleteAccount = async () => {

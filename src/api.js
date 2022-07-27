@@ -22,6 +22,9 @@ export const api = {
     return api.provider().verifyAccount(token);
   },
 
+  updateAccount: (data) => {
+    return api.provider().updateAccount(data);
+  },
   createApp: (data) => {
     return api.provider().createApp(data);
   },

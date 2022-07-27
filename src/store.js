@@ -91,6 +91,31 @@ const account = {
         return false;
       }
     },
+    UPDATE_ACCOUNT: async ({ commit, state, dispatch }, data) => {
+      dispatch("START_LOADING", "Updating account..")
+      try {
+        const response = await api.updateAccount({
+          data,
+          sessionToken: state.session.token
+        });
+        dispatch("STOP_LOADING")
+        let { account } = response
+        commit('updateUser', account);
+        commit("notify", {
+          message: "Account info updated",
+          type: "success",
+        });
+        return true
+      } catch (error) {
+        dispatch("STOP_LOADING")
+        let errorMessage = processError(error, {dispatch})
+        commit("notify", {
+          message: errorMessage || "Unknown Error",
+          type: "error",
+        });
+        return null
+      }
+    },
     LOGIN: async ({ commit, dispatch }, email) => {
       dispatch("START_LOADING", "Sending magic link..")
       try{
