@@ -203,6 +203,11 @@ const account = {
         let tempApp = {...app}
         delete app.secret
         commit('addNewApp', app);
+        commit("notify", {
+          message: `New Keys created for ${app.name}. Store the secret somewhere as it will only be shown once.`,
+          type: "success",
+          timeout: 25000
+        });
         return tempApp
       } catch (error) {
         dispatch("STOP_LOADING")
