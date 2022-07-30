@@ -156,8 +156,11 @@ const account = {
         return true
       } catch(error){
         dispatch("STOP_LOADING")
-        console.log(error)
-        commit('notify', {type: 'error', message: 'Failed to login', timeout: 10000})
+        let errorMessage = processError(error, {dispatch})
+        commit("notify", {
+          message: errorMessage || "Unknown Error",
+          type: "error",
+        });
         return false
       }
     },
