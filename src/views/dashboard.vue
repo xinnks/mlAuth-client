@@ -368,6 +368,10 @@ const missing = (field, val, format = true) => {
           </div>
         </div>
         <!-- Apps -->
+
+        <div v-if="!apps.length" class="w-full flex justify-center mt-3 py-2">
+          <p>Add a new app to start authenticating users.</p>
+        </div>
         
       </div>
 
