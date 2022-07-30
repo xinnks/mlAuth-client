@@ -29,36 +29,27 @@ let form = reactive({
       value: "",
       error: false
     },
-    appName: {
-      label: "App Name",
-      type: "text",
-      value: "",
-      error: false
-    },
   },
   actionLabel: "Register"
 })
 
 const register = async () => {
-  let { email, firstName, lastName, appName} = form.fields
+  let { email, firstName, lastName } = form.fields
   if(firstName.value === "") return missing("First Name", firstName)
   if(lastName.value === "") return missing("Last Name", lastName)
   if(form.fields.email.value === "") return missing("Email", email)
   if(!/[\d\w]+@[\d\w]+\.{1}\w{2,}/gi.test(email.value)) return missing("email", email, false)
-  if(appName.value === "") return missing("App Name", appName)
 
   let createAccount = await store.dispatch('CREATE_ACCOUNT', {
     email: email.value,
     first_name: firstName.value,
     last_name: lastName.value,
-    app_name: appName.value,
   });
 
   if(createAccount){
     email.value = ""
     firstName.value = ""
     lastName.value = ""
-    appName.value = ""
 
     setTimeout(() => router.replace('/login'), 5000)
   }
