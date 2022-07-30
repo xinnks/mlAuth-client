@@ -29,7 +29,7 @@ watch(session, (val) => {
   }
 })
 
-let darkMode = computed(() => store.getters.getDarkMode)
+const darkMode = computed(() => store.getters.getDarkMode)
 
 /**
  * @description Toggles dark mode
