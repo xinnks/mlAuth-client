@@ -25,7 +25,6 @@ const logOut = async () => {
  * */
 watch(session, (val) => {
   if(!val){
-    console.log("Logging out! [navigation] ", val)
     router.replace("/login")
   }
 })
