@@ -8,6 +8,7 @@
     "format": "prettier --write '*.js' '**/*.{js,vue}' '**/**/*.{js,vue}'",
     "preview": "vite preview"
   },
+  "license": "MIT",
   "dependencies": {
     "ohmyfetch": "^0.4.18",
     "vue": "^3.2.25",
