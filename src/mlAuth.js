@@ -149,8 +149,7 @@ export default class mlAuth {
 				body: { ...data, sessionToken }
 			})
 		} catch (error) {
-			console.log({error})
-			throw error
+			throw new Error(error)
 		}
 	}
 
@@ -165,8 +164,7 @@ export default class mlAuth {
 				body: { ...data, sessionToken }
 			})
 		} catch (error) {
-			console.log({error})
-			throw error
+			throw new Error(error)
 		}
 	}
 

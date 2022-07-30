@@ -10,7 +10,7 @@ const processError = (error, {dispatch}) => {
   let message = "Unknown Error"
   if(error instanceof FetchError){
     message = error.data ? error.data.message : message
-    if(error.response.status === (401 || 403)){
+    if(error.response.status === 401 || error.response.status === 403){
       dispatch("LOGOUT")
     }
   }
@@ -198,7 +198,6 @@ const account = {
           sessionToken: state.session.token
         });
         dispatch("STOP_LOADING")
-        console.log({response})
         let { app } = response
         let tempApp = {...app}
         delete app.secret
@@ -281,7 +280,6 @@ const account = {
           sessionToken: state.session.token
         });
         dispatch("STOP_LOADING")
-        console.log({response})
         commit('deleteApp', appId);
       } catch (error) {
         dispatch("STOP_LOADING")
@@ -360,7 +358,6 @@ export const store = createStore({
       return true;
     },
     TOGGLE_DARK_MODE({state}){
-      console.log("Here 2")
       state.darkMode = !state.darkMode
     }
   },

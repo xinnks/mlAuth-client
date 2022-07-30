@@ -25,12 +25,11 @@ const logOut = async () => {
  * */
 watch(session, (val) => {
   if(!val){
-    console.log("Logging out! [navigation] ", val)
     router.replace("/login")
   }
 })
 
-let darkMode = computed(() => store.getters.getDarkMode)
+const darkMode = computed(() => store.getters.getDarkMode)
 
 /**
  * @description Toggles dark mode
