@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-4 justify-center min-h-[100vh]">
+  <div class="flex flex-col space-y-4 justify-center min-h-[100vh] dark:bg-gray-800 dark:text-white">
     
     <div class="flex flex-col justify-center items-center space-x-4 p-8">
       <img alt="mlAuth logo" class="w-48 self-center" src="./../assets/mlAuth.svg" />
@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <p class="mx-auto p-4 text-2xl text-slate-600 font-semibold">
+    <p class="mx-auto p-4 text-2xl text-slate-600 dark:text-white font-semibold">
       You build,
       we'll authenticate.
     </p>

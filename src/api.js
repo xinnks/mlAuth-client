@@ -15,15 +15,35 @@ export const api = {
   },
 
   createAccount: (data) => {
-    return api.provider().createApp(data);
+    return api.provider().registerUser(data);
   },
 
   verifyAccount: (token) => {
-    return api.provider().verifyApp(token);
+    return api.provider().verifyAccount(token);
+  },
+
+  updateAccount: (data) => {
+    return api.provider().updateAccount(data);
+  },
+
+  deleteAccount: (data) => {
+    return api.provider().deleteAccount(data);
+  },
+
+  createApp: (data) => {
+    return api.provider().createApp(data);
+  },
+
+  updateApp: (data) => {
+    return api.provider().updateApp(data);
   },
 
   generateKeys: (data, token) => {
     return api.provider().generateKeys(data, token);
+  },
+
+  deleteApp: (data, token) => {
+    return api.provider().deleteApp(data, token);
   },
 
   createLoginRequest: (email) => {

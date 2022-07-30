@@ -3,29 +3,35 @@ import { $fetch } from "ohmyfetch"
 export default class mlAuth {
 
 	constructor({key, secret}){
-		this.endpoint = "https://ml-auth.ml"
-		const customFetch = $fetch.create({
+		this.endpoint = "https://api.mlauth.ml"
+		let credentials;
+		if(window){
+			credentials = btoa(`${key}:${secret}`)
+		} else {
+			let buffer = Buffer.from(`${key}:${secret}`, "utf8")
+			credentials = buffer.toString("base64");
+		}
+		this.client = $fetch.create({
 			baseURL: this.endpoint,
 			method: 'POST',
 			headers: {
 		    Accept: 'application/json',
-  			"Authorization": `Basic `+ btoa(`${key}:${secret}`)
+  			"Authorization": `Basic ${credentials}`
 		  }
 		})
-		this.client = customFetch
 	}
 
 	/**
 	 * makes a login request for app client
 	 */
 	async login(email){
-		if(!email) throw("Email is missing")
+		if(!email) throw new Error("Email is missing")
 		try {
 			return this.client(`/ml/login`, {
 				body: { email }
 			})
 		} catch (error) {
-			throw(error)
+			throw new Error(error)
 		}
 	}
 
@@ -33,13 +39,13 @@ export default class mlAuth {
 	 * Verifies a login request token from the magic link
 	 */
 	async verify(token){
-		if(!token) throw("Token is missing")
+		if(!token) throw new Error("Token is missing")
 		try {
 			return this.client(`/ml/verify`, {
 				body: { token }
 			})
 		} catch (error) {
-			throw(error)
+			throw new Error(error)
 		}
 	}
 
@@ -48,28 +54,87 @@ export default class mlAuth {
 	/**
 	 * Registers a new app to the service
 	 */
-	async createApp(data){
-		if(!data) throw("user data is missing")
+	async registerUser(data){
+		if(!data) throw new Error("user data is missing")
 		try {
-			return this.client(`/service/register`, {
+			return this.client(`/auth/register`, {
 				body: data
 			})
 		} catch (error) {
-			throw(error)
+			throw new Error(error)
 		}
 	}
 
 	/**
-	 * Verifies an app's account after registration
+	 * Verifies a user's account after registration
 	 */
-	async verifyApp(token){
-		if(!token) throw("token is missing")
+	async verifyAccount(token){
+		if(!token) throw new Error("token is missing")
 		try {
-			return this.client(`/service/verify`, {
+			return this.client(`/auth/verify`, {
 				body: { token }
 			})
 		} catch (error) {
-			throw(error)
+			throw new Error(error)
+		}
+	}
+
+	/**
+	 * @description Updates a user's details
+	 */
+	async updateAccount({data, sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		if(!data) throw new Error("data is missing")
+		try {
+			return this.client(`/service/update-account`, {
+				body: { ...data, sessionToken }
+			})
+		} catch (error) {
+			throw new Error(error)
+		}
+	}
+
+	/**
+	 * @description Deletes an account
+	 */
+	async deleteAccount({sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		try {
+			return this.client(`/service/delete-account`, {
+				body: { sessionToken }
+			})
+		} catch (error) {
+			throw new Error(error)
+		}
+	}
+
+	/**
+	 * @description Creates a new app
+	 */
+	async createApp({data, sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		if(!data) throw new Error("data is missing")
+		try {
+			return this.client(`/service/create-app`, {
+				body: { ...data, sessionToken }
+			})
+		} catch (error) {
+			throw new Error(error)
+		}
+	}
+
+	/**
+	 * @description Updates an app's details
+	 */
+	async updateApp({data, sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		if(!data) throw new Error("data is missing")
+		try {
+			return this.client(`/service/update-app`, {
+				body: { ...data, sessionToken }
+			})
+		} catch (error) {
+			throw new Error(error)
 		}
 	}
 
@@ -77,14 +142,31 @@ export default class mlAuth {
 	 * App keys generation request
 	 */
 	async generateKeys({data, sessionToken}){
-		if(!sessionToken) throw("sessionToken is missing")
-		if(!data.callback_url) throw("callback_url is missing")
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		if(!data.app_id) throw new Error("app_id is missing")
 		try {
-			return this.client.raw(`/service/generate-keys`, {
+			return this.client(`/service/generate-keys`, {
 				body: { ...data, sessionToken }
 			})
 		} catch (error) {
-			throw(error)
+			console.log({error})
+			throw error
+		}
+	}
+
+	/**
+	 * App keys generation request
+	 */
+	async deleteApp({data, sessionToken}){
+		if(!sessionToken) throw new Error("sessionToken is missing")
+		if(!data.app_id) throw new Error("app_id is missing")
+		try {
+			return this.client(`/service/delete-app`, {
+				body: { ...data, sessionToken }
+			})
+		} catch (error) {
+			console.log({error})
+			throw error
 		}
 	}
 
@@ -92,13 +174,13 @@ export default class mlAuth {
 	 * Ends an app's session from the mlAuth client
 	 */
 	async logout(sessionToken){
-		if(!sessionToken) throw("sessionToken is missing")
+		if(!sessionToken) throw new Error("sessionToken is missing")
 		try {
 			return this.client.raw(`/service/logout`, {
 				body: { sessionToken }
 			})
 		} catch (error) {
-			throw(error)
+			throw new Error(error)
 		}
 	}
 }

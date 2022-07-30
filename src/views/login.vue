@@ -25,7 +25,8 @@ const login = async () => {
   if(!/[\d\w]+@[\d\w]+\.{1}\w{2,}/gi.test(email.value)) return missing("email", email, false)
 
   let sent = await store.dispatch('LOGIN', email.value);
-  if(sent) email.value === ""
+  if(sent)
+    email.value = ""
 }
 
 const missing = (field, val, syntax = true) => {

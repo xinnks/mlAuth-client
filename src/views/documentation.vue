@@ -4,14 +4,15 @@
 
 <template>
   <page>
+    <template #icon>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 22H5a3 3 0 0 1-3-3V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12h4v4a3 3 0 0 1-3 3zm-1-5v2a1 1 0 0 0 2 0v-2h-2zm-2 3V4H4v15a1 1 0 0 0 1 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z"/></svg>
+    </template>
+    <template #title>Documentation</template>
     <template #page>
-        <div class="mt-4 w-full inline-flex items-center justify-between ring-2 ring-primary-800 px-3 py-2 rounded-2xl bg-white">
-          <h1 class="text-2xl font-semibold">mlAuth Documentation</h1>
-        </div>
 
-        <div class="mt-4 w-full px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h2 class="text-xl font-bold">Table of contents</h2>
-          <ul class="font-400 pl-4">
+          <ul class="font-400 pl-4 dark:text-primary">
             <li>
               <a href="#creating-an-account">Creating an account</a>
             </li>
@@ -35,7 +36,7 @@
           </ul>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800 dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="creating-an-account">Creating an account</h3>
           <p>
             To authenticate users in your project with magic links you need to first <router-link to="/register">create an account</router-link>.
@@ -49,7 +50,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="generating-app-credentials">Generating app credentials</h3>
           <p>
             Inside your dashboard under the "My Apps" clink on the "Add Keys" button.
@@ -65,7 +66,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="the -authentication-flow">The authentication flow</h3>
           <p>
             Before proceeding to the next steps, we need to understand mlAuth's authentication flow so as we can properly integrate it in our apps. We'll break the flow to the following series of simple steps<br>
@@ -77,7 +78,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h3 class="text-lg font-semibold" id="making-authentication-requests">Making authentication requests</h3>
           <p>
             Now that we understand the authentication flow, we can start making requests to mlAuth. <br>
@@ -93,7 +94,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h4 class="font-semibold" id="making-login-requests">Making login requests</h4>
           <p>
             To make login requests with the assistance of the mlAuth npm package, we need to create an instance of mlAuth providing the <strong><i>client key</i></strong> and <strong><i>client secret</i></strong> we obtained while <a href="#generating-app-credentials">generating app credentials</a>.
@@ -125,7 +126,7 @@
           </p>
         </div>
 
-        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white">
+        <div class="mt-4 w-full ring-1 ring-gray-100 px-3 py-2 rounded-2xl bg-white dark:bg-gray-800">
           <h4 class="font-semibold" id="making-login-verification-requests">Making login verification requests</h4>
           <p>
             To verify login requests, you need to obtain a token query parameter passed as part of the callback url.
@@ -146,7 +147,7 @@
   </page>
 </template>
 
-<style>
+<style scoped>
 p {
   margin-top: 1em;
 }
@@ -155,10 +156,8 @@ ul {
 }
 a{
   text-decoration: underline;
-  color: #958b04
 }
 li > a {
-  color: black;
   text-decoration: none
 }
 code{

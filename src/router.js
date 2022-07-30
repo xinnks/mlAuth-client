@@ -17,6 +17,12 @@ export const routes = [
     component: () => import('./views/register.vue'),
   },
   {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('./views/settings.vue'),
+    meta: { needsAuth: true }
+  },
+  {
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('./views/dashboard.vue'),
