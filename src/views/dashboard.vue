@@ -7,7 +7,7 @@ import page from './../layouts/page.vue'
 const store = useStore();
 const route = useRoute();
 
-let showAppForm = ref(false);
+let showNewAppForm = ref(false);
 let showAppUpdateForm = ref(false);
 let hideApps = ref({})
 let visibleSecrets = ref({})
@@ -69,11 +69,11 @@ onMounted(() => {
 }, {immediate: true})
 
 const prepareNewApp = () => {
-  showAppForm.value = true
+  showNewAppForm.value = true
 }
 
 const cancelNewApp = () => {
-  showAppForm.value = false
+  showNewAppForm.value = false
   newApp = tempForm
 }
 
@@ -248,7 +248,7 @@ const missing = (field, val, format = true) => {
       <div>
 
         <!-- New App Form -->
-        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4 dark:bg-gray-800" v-if="showAppForm">
+        <div class="w-full inline-flex flex-col px-6 pb-6 pt-3 ring-2 bg-white ring-gray-400 rounded-2xl mt-8 space-y-4 dark:bg-gray-800" v-if="showNewAppForm">
           <div class="inline-flex justify-center mb-4">
             <span class="font-bold">Create a new app</span>
           </div>
@@ -316,7 +316,7 @@ const missing = (field, val, format = true) => {
         <!-- App Update Form -->
 
         <!-- Apps -->
-        <div v-for="(app, key) in apps" :key="key" class="inline-flex w-full px-2 py-4" v-if="!showAppForm && apps && !showAppUpdateForm">
+        <div v-for="(app, key) in apps" :key="key" class="inline-flex w-full px-2 py-4" v-if="!showNewAppForm && apps && !showAppUpdateForm">
           <div class="w-full inline-flex flex-col justify-center ring-2 ring-gray-300 px-6 pb-6 pt-2 rounded-2xl relative">
             <div class="flex pt-2 pb-3 mb-2 border-b-2 justify-between" :class="{'border-red-300': !app.production, 'border-green-300': app.production}">
               <span class="font-semibold">{{app.name}}</span>
@@ -372,7 +372,7 @@ const missing = (field, val, format = true) => {
       </div>
 
       <div class="w-full flex justify-center mt-3 py-2">
-        <button title="Add new app" class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="prepareNewApp()" v-show="!showAppForm">
+        <button title="Add new app" class="bg-gray-700 text-white ring-gray-300 hover:bg-yellow-300 hover:text-black font-bold rounded-full inline-flex items-center justify-center px-4 py-2 ring-0 hover:ring-black dark:ring-2" @click="prepareNewApp()" v-show="!showNewAppForm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-5 h-5 mr-2"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
           <span>New App</span>
         </button>
