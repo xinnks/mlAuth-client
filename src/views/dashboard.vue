@@ -28,6 +28,16 @@ watch(apps, (appsList) => {
   immediate: true
 })
 
+/**
+ * @description We cannot have both the new app and appUpdate forms open open at the same time
+ * */
+watch(showNewAppForm, (status) => {
+  if(status) showAppUpdateForm.value = false
+})
+watch(showAppUpdateForm, (status) => {
+  if(status) showNewAppForm.value = false
+})
+
 let newApp = reactive({
   title: "New App",
   fields: {
