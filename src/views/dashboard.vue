@@ -190,7 +190,7 @@ const updateApp = async () => {
     name: updateAppName.value,
     life_span: updateLifeSpan.value || 1800000,
     callback_url: updateCallbackUrl.value,
-    production: updateProduction.value === "checked",
+    production: updateProduction.value,
     app_id: appChanges.id
   }
 
