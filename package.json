@@ -1,12 +1,25 @@
 {
   "name": "mlauth-client",
   "version": "0.0.0",
-  "description": "mlAuth magic link authentication service's website",
+  "description": "mlAuth, the magic link authentication service's website",
   "scripts": {
     "dev": "concurrently \"format\" \"vite\"",
     "build": "vite build",
     "format": "prettier --write '*.js' '**/*.{js,vue}' '**/**/*.{js,vue}'",
     "preview": "vite preview"
+  },
+  "keywords": [
+    "mlAuth",
+    "magic links authentication",
+    "planetscape",
+    "hashnode",
+    "planetscale hackathon"
+  ],
+  "author": "James Sinkala <xinnks@gmail.com> (https://jamesinkala.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xinnks/mlAuth-client.git"
   },
   "dependencies": {
     "ohmyfetch": "^0.4.18",
