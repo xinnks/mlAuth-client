@@ -23,10 +23,10 @@ import PublicPage from "./../layouts/publicPage.vue";
             <a href="#generating-new-app-credentials">Generating new app credentials</a>
           </li>
           <li>
-            <a href="#the -authentication-flow">The authentication flow</a>
+            <a href="#the-authentication-flow">The authentication flow</a>
           </li>
           <li>
-            <a href="#authentication-preparation">Preparing a project for mlAuth authentication requests</a>
+            <a href="#authentication-preparation">Preparing a project for <strong>mlAuth</strong> authentication requests</a>
             <ul class="pl-4">
               <li>
                 <a href="#making-login-requests">Making login requests</a>
@@ -35,6 +35,9 @@ import PublicPage from "./../layouts/publicPage.vue";
                 <a href="#making-login-verification-requests">Making login verification requests</a>
               </li>
             </ul>
+          </li>
+          <li>
+            <a href="#authentication-in-non-javascript-projects">Authentication in non-JavaScript projects</a>
           </li>
         </ul>
       </div>
@@ -56,12 +59,12 @@ import PublicPage from "./../layouts/publicPage.vue";
           Inside your dashboard under the "My Apps" clink on the "New App" button.
           Provide the following information: <br>
           <strong>App Name</strong> - This is the name of your app,. Two apps can't have the same name.
-          <strong>callback URL</strong> - This is the url that mlAuth will be redirecting your users to after they open the magic links sent to them. <br>
+          <strong>callback URL</strong> - This is the url that <strong>mlAuth</strong> will be redirecting your users to after they open the magic links sent to them. <br>
           <strong>Magic Link Timeout</strong> - This is the time in milliseconds which the magic links that will be sent to your users will take to expire. When not provided, we will assign a default 1800000 (30 minutes) limit.
           <strong>App Environment</strong> - This is your app's environment, it is set to development by default.
         </p>
         <p>
-          On successful app creation, you will be presented with your <strong><i>Client</i></strong> and <strong><i>Secret</i></strong> Keys. You will be using these two keys to authenticate your apps requests to mlAuth as per the following instructions. <br>
+          On successful app creation, you will be presented with your <strong><i>Client</i></strong> and <strong><i>Secret</i></strong> Keys. You will be using these two keys to authenticate your apps requests to <strong>mlAuth</strong> as per the following instructions. <br>
         </p>
         <p>
           <i><strong>IMPORTANT</strong>: Store the <strong>Secret</strong> key somewhere safe as it will be displayed to you only once.</i>
@@ -78,24 +81,24 @@ import PublicPage from "./../layouts/publicPage.vue";
       </div>
 
       <div class="mt-4 w-full px-3 py-2">
-        <h3 class="text-lg xl:text-xl font-semibold" id="the -authentication-flow">The authentication flow</h3>
+        <h3 class="text-lg xl:text-xl font-semibold" id="the-authentication-flow">The authentication flow</h3>
         <p>
-          Before proceeding to the next steps, we need to understand mlAuth's authentication flow so we can properly integrate it in our apps. We'll break the flow to the following series of simple steps<br>
+          Before proceeding to the next steps, we need to understand <strong>mlAuth</strong>'s authentication flow so we can properly integrate it in our apps. We'll break the flow to the following series of simple steps<br>
           <strong id="step-1">Step 1</strong>. A user arrives at your app's login page, they provide their email address and submit it. <br>
-          <strong id="step-2">Step 2</strong>. Your login page makes a "login request" to mlAuth providing the user's email address. <br>
-          <strong id="step-3">Step 3</strong>. mlAuth sends a magic authentication link to the email provided in the login request. <br>
+          <strong id="step-2">Step 2</strong>. Your login page makes a "login request" to <strong>mlAuth</strong> providing the user's email address. <br>
+          <strong id="step-3">Step 3</strong>. <strong>mlAuth</strong> sends a magic authentication link to the email provided in the login request. <br>
           <strong id="step-4">Step 4</strong>. The email recipient opens the magic link and is redirect to the page in your app that was provided as the <strong>callbackUrl</strong> when you were <a href="#creating-apps">creating your app</a>.
-          <strong id="step-5">Step 5</strong>. You make a "magic link verification" request to mlAuth, where you will either receive the magic link with further details concerning the request or a failed response. You then decide to either authenticate or reject the user access to your app.
+          <strong id="step-5">Step 5</strong>. You make a "magic link verification" request to <strong>mlAuth</strong>, where you will either receive the magic link with further details concerning the request or a failed response. You then decide to either authenticate or reject the user access to your app.
         </p>
       </div>
 
       <div class="mt-4 w-full px-3 py-2">
-        <h3 class="text-lg xl:text-xl font-semibold" id="authentication-preparation">Preparing a project for mlAuth authentication requests.</h3>
+        <h3 class="text-lg xl:text-xl font-semibold" id="authentication-preparation">Preparing a project for <strong>mlAuth</strong> authentication requests.</h3>
         <p>
-          Now that we understand the authentication flow, we can set our projects up for making authentication requests to mlAuth. <br>
+          Now that we understand the authentication flow, we can set our projects up for making authentication requests to <strong>mlAuth</strong>. <br>
         </p>
         <p>
-          To automate this process, install mlAuth's JavaScript client - <a href="https://npmjs.com/package/mlauth-js"><strong>mlauth-js</strong></a>.
+          To automate this process, install <strong>mlAuth</strong>'s JavaScript client - <a href="https://npmjs.com/package/mlauth-js"><strong>mlauth-js</strong></a>.
         </p>
         <p>
           <em>
@@ -105,7 +108,7 @@ import PublicPage from "./../layouts/publicPage.vue";
           </em>
         </p>
         <p>
-          Before we can start to make login requests to mlAuth, we need to first import the package.
+          Before we can start to make login requests to <strong>mlAuth</strong>, we need to first import the package.
         </p>
         <p>
           In your front-end projects.
@@ -128,7 +131,7 @@ import PublicPage from "./../layouts/publicPage.vue";
           </em>
         </p>
         <p>
-          Next, proceed to creating an instance of mlAuth, providing your apps credentials, the <strong><i>Client</i></strong> and <strong><i>Secret</i></strong> keys we obtained above..
+          Next, proceed to creating an instance of <strong>mlAuth</strong>, providing your apps credentials, the <strong><i>Client</i></strong> and <strong><i>Secret</i></strong> keys we obtained above..
         </p>
         <p>
           <em>
@@ -141,14 +144,14 @@ import PublicPage from "./../layouts/publicPage.vue";
           </em>
         </p>
         <p>
-          Now we are set to make "login" and "magic link verification" requests as outlined on <a href="step-2">step 2</a> and <a href="step-5">step 5</a> respectively.
+          Now we are set to make "login" and "magic link verification" requests as outlined on <a href="#step-2">step 2</a> and <a href="#step-5">step 5</a> respectively.
         </p>
       </div>
 
       <div class="mt-4 w-full px-3 py-2">
         <h4 class="text-lg xl:text-xl font-semibold" id="making-login-requests">Making login requests</h4>
         <p>
-          The mlAuth instance provides a login() function that takes an email string as the sole argument, pass your user's email here and wait for the response.
+          The <strong>mlAuth</strong> instance provides a login() function that takes an email string as the sole argument, pass your user's email here and wait for the response.
         </p>
         <p>
           <em>
@@ -171,7 +174,7 @@ import PublicPage from "./../layouts/publicPage.vue";
           When a user opens the magic link provided in the email sent to them, they will be redirected to the route specified on the callbackUrl field you provided while creating your app.
           <br>
           To verify magic links, you need to first obtain the token which is passed as a query named 'token' on the callback url.
-          Then proceed to verifying that token using the verify() method of the previously created mlAuth instance.
+          Then proceed to verifying that token using the verify() method of the previously created <strong>mlAuth</strong> instance.
         </p>
         <p>
           <em>
@@ -181,10 +184,56 @@ import PublicPage from "./../layouts/publicPage.vue";
           </em>
         </p>
         <p>
-          The verification request returns a Promise that when successful, resolves with an Object with two properties, a <strong>magicLink</strong> Object that contains the details of the magic link, the magic link's properties contain the email of the user that the magic link was sent to, the secong property is a <strong>message</strong> String that contains the message detailing what happened.
+          The verification request returns a Promise that when successful, resolves with an Object with two properties, a <strong>magicLink</strong> Object that contains the details of the magic link, the magic link's properties contain the email of the user that the magic link was sent to, the second property is a <strong>message</strong> String that contains the message detailing what happened.
         </p>
         <p>
           On failure, an error is thrown with a <strong>message</strong> string that detailing what went wrong.
+        </p>
+      </div>
+
+      <div class="mt-4 w-full px-3 py-2">
+        <h3 class="text-lg xl:text-xl font-semibold" id="authentication-in-non-javascript-projects">Authentication in non-JavaScript projects</h3>
+        <p>
+          If you are creating your project in languages other than JavaScript, you still can use <strong>mlAuth</strong> to authenticate users.
+          <br>
+          You only need to take a route a bit different than the one used above.
+        </p>
+        <p>
+          Since <strong>mlAuth</strong> uses the Basic Authentication method to authenticate apps, you can use your http client of choice to make login requests and verify magic links.
+        </p>
+        <p>
+          To use the Basic Auth method, create a <strong>base64</strong> String of your app's registered <strong>client</strong> and <strong>secret</strong> keys in the format:
+        </p>
+        <p>
+          <em>
+            <code>
+              CLIENT:SECRET
+            </code>
+          </em>
+        </p>
+        <p>
+          For example, here is how we can construct a <strong>base64</strong> String in NodeJs.
+        </p>
+        <p>
+          <img src="./../assets/ba64-string-nodejs.jpeg" alt="Login request code">
+        </p>
+        <p>
+          <strong>Note:</strong> Separate the keys with the colon (:) in between leaving no space, just as demonstrated above.
+        </p>
+        <p>
+          To make login requests, send a http POST request to `https://api.mlauth.ml/ml/login`, containing <code>email</code> in the json payload and adding an Authorization containing the string - <code>Basic CLIENT_SECRET_BASE_64</code>. Here is a CURL example.
+        </p>
+        <p>
+          <img src="./../assets/http-post-login.jpeg" alt="Login request code">
+        </p>
+        <p>
+          Likewise, with magic link verification requests, send a http POST request to `https://api.mlauth.ml/ml/verify`, containing <code>token</code> in the json payload, adding an Authorization header containing <code>Basic CLIENT_SECRET_BASE_64</code>. Here is a magic link verification CURL example.
+        </p>
+        <p>
+          <img src="./../assets/http-post-verify.jpeg" alt="Magic link verification code">
+        </p>
+        <p>
+          <strong>Note:</strong> <strong>mlAuth</strong> will not authenticate requests that send keys outside the <strong>base64</strong> format.
         </p>
       </div>
     </div>
