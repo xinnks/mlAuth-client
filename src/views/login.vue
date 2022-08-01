@@ -1,6 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
 import { useStore } from 'vuex';
+import { Head } from '@vueuse/head'
 import formLayout from './../layouts/form.vue';
 import formComponent from '../components/form.vue';
 
@@ -39,6 +40,10 @@ const missing = (field, val, syntax = true) => {
 </script>
 
 <template>
+  <Head>
+    <title>Login - mlAuth</title>
+    <meta name="description" content="User authentication page.">
+  </Head>
   <formLayout>
     <template #form>
       

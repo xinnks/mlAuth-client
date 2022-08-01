@@ -1,8 +1,13 @@
 <script setup>
 import PublicPage from "./../layouts/publicPage.vue";
+import { Head } from '@vueuse/head'
 </script>
 
 <template>
+  <Head>
+    <title>Documentation - mlAuth</title>
+    <meta name="description" content="mlAuth's documentation">
+  </Head>
   <public-page>
     <div class="px-5 md:px-16 xl:px-24 py-24 bg-white dark:bg-gray-800 dark:text-white">
 

@@ -1,4 +1,12 @@
+<script>
+import { Head } from '@vueuse/head'
+</script>
+
 <template>
+  <Head>
+    <title>404 - mlAuth</title>
+    <meta name="description" content="Page not found">
+  </Head>
   <div class="flex flex-col space-y-4 justify-center min-h-[100vh]">
     
     <div class="flex justify-center items-center space-x-4 p-8 filter grayscale">

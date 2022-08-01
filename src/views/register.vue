@@ -2,6 +2,7 @@
 import { reactive } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { Head } from '@vueuse/head'
 import formLayout from './../layouts/form.vue';
 import formComponent from '../components/form.vue';
 
@@ -65,6 +66,10 @@ const missing = (field, val, syntax = true) => {
 </script>
 
 <template>
+  <Head>
+    <title>Registration - mlAuth</title>
+    <meta name="description" content="User registration page">
+  </Head>
   <formLayout>
     <template #form>
       
