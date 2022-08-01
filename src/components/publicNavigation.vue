@@ -194,7 +194,7 @@ const toggleDarkMode = () => {
           </svg>
         </button>
       </div>
-      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 bg-white lg:bg-transparent text-primary p-4 lg:p-0 z-20" :class="{'hidden': !navToggle}">
+      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 lg:bg-transparent text-primary p-4 lg:p-0 z-20" :class="{'hidden': !navToggle, 'bg-gray-700': navToggle, 'bg-gray-700 bg-white': navToggle && scrollPosRef > 10}">
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="mr-3">
             <router-link to="/docs" class="inline-block text-primary no-underline hover:text-green hover:text-underline py-2 px-4" :class="{'text-gray-800': scrollPosRef > 10}">Documentation</router-link>
