@@ -203,7 +203,7 @@ const toggleDarkMode = () => {
             <a class="inline-block text-primary no-underline hover:text-green hover:text-underline py-2 px-4" :class="{'text-gray-800': scrollPosRef > 10}" href="#faq">FAQ</a>
           </li>
           <li class="mr-3">
-            <router-link to="/login" class="inline-block text-primary no-underline hover:text-green hover:text-underline py-2 px-4" :class="{'text-gray-800': scrollPosRef > 10}">Sign In</router-link>
+            <router-link to="/login" class="inline-block text-primary no-underline hover:text-green hover:text-underline py-2 px-4" :class="{'text-gray-800': scrollPosRef > 10}">Log In</router-link>
           </li>
         </ul>
         <router-link

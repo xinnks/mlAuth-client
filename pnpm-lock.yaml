@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@vitejs/plugin-vue': ^2.3.1
+  '@vueuse/head': ^0.7.8
   autoprefixer: ^10.4.7
   concurrently: ^7.2.2
   ohmyfetch: ^0.4.18
@@ -16,6 +17,7 @@ specifiers:
   vuex-persist: ^3.1.3
 
 dependencies:
+  '@vueuse/head': 0.7.8_vue@3.2.33
   ohmyfetch: 0.4.18
   vue: 3.2.33
   vue-router: 4.0.15_vue@3.2.33
@@ -160,6 +162,14 @@ packages:
 
   /@vue/shared/3.2.33:
     resolution: {integrity: sha512-UBc1Pg1T3yZ97vsA2ueER0F6GbJebLHYlEi4ou1H5YL4KWvMOOWwpYo9/QpWq93wxKG6Wo13IY74Hcn/f7c7Bg==}
+
+  /@vueuse/head/0.7.8_vue@3.2.33:
+    resolution: {integrity: sha512-D0lFcCgynjzTVVHM2RsQShDxKfjgbc2vhzeLqkOyH0lKEV3iv4xJ8ZSIW47V4XC6erGpnM2z2XGnwltMZFn7oA==}
+    peerDependencies:
+      vue: '>=3'
+    dependencies:
+      vue: 3.2.33
+    dev: false
 
   /acorn-node/1.8.2:
     resolution: {integrity: sha512-8mt+fslDufLYntIoPAaIMUe/lrbrehIiwmR3t2k9LljIzoigEPF27eLk2hy8zSGzmR/ogr7zbRKINMo1u0yh5A==}
