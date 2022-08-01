@@ -1,10 +1,12 @@
 import { createApp } from 'vue'
+import { createHead } from '@vueuse/head'
 import { router } from './router'
 import { store } from './store'
 import App from './App.vue'
 import "./index.css"
 
 const mlAuth = createApp(App)
+const head = createHead()
 
 router.beforeEach((to, from) => {
   if(!store.getters.getSession && to.meta.needsAuth){
@@ -17,4 +19,5 @@ router.beforeEach((to, from) => {
 
 mlAuth.use(store)
 mlAuth.use(router)
+mlAuth.use(head)
 mlAuth.mount('#app')
