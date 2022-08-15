@@ -9,7 +9,7 @@
 <center>Magic link authentication service for your projects.</center>
 
 <center>
-    <i>[built for the <a href="https://planetscape.com" title="Planetscape website">Planetscape</a> x <a href="https://hashnode.com" title="Hashnode website">Hashnode</a> Hackathon]</i>
+    <i>[built for the <a href="https://planetscale.com" title="Planetscale website">Planetscale</a> x <a href="https://hashnode.com" title="Hashnode website">Hashnode</a> Hackathon]</i>
 </center>
 
 ## Website
@@ -19,7 +19,7 @@ Website can be visited [here](https://mlauth.ml).
 - Built with Vue.js.
 - [mlAuth]() - Back-end api, built with ExpressJs.
 - Hosted on Linode
-- Data stored on [Planetscape](https://planetscape.com).
+- Data stored on [Planetscale](https://planetscale.com).
 
 ## Previews
 
